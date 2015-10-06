@@ -1,0 +1,120 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core"  >
+
+	<ui:define name="title">Cadastro de Dono</ui:define>
+	
+	<ui:define name="content">
+		<h:form id="formTable">
+		<p:dataTable value="#{crtCliente.clienteBean.getTodosClientes()}" 
+					var="cliente">
+				<f:facet name="header">Listar Clientes</f:facet>
+					<p:column>
+						<f:facet name="header">oid</f:facet>
+						<h:outputText value="#{cliente.oid}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Cpf</f:facet>
+						<h:outputText value="#{cliente.cpf}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:outputText value="#{cliente.nome}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Telefone</f:facet>
+						<h:outputText value="#{cliente.telefone}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Email</f:facet>
+						<h:outputText value="#{cliente.email}"/>
+					</p:column>
+					
+					<f:facet name="footer">
+					<p:commandButton id="cbIncluir" value="Inserir"
+						oncomplete=" $('#modal1').openModal();"
+						action="#{crtCliente.createNewCliente()}">
+					</p:commandButton>
+					</f:facet>
+		</p:dataTable>
+		</h:form>
+		
+		<h:form styleClass="col s12" >
+			<div id="modal1" class="modal">
+			    <div class="modal-content">
+			      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Placeholder" id="first_name" type="text" class="validate" />
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate" />
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input value="I am not editable" id="disabled" type="text" class="validate" />
+          <label for="disabled">Disabled</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate" />
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate" />
+          <label for="email">Email</label>
+        </div>
+      </div>
+			    </div>
+			  </div>
+  		</h:form>
+  		
+		<!-- incluir -->
+		<h:form>
+			<p:dialog width="500" height="500" widgetVar="dlg1">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="cpf"/>  <!-- label -->
+					<p:inputText id="txtCpf" value="#{crtCliente.model.cpf}"/> <!-- txt  -->
+					
+					<h:outputLabel value="nome"/>  <!-- label -->
+					<p:inputText id="txtNome" value="#{crtCliente.model.nome}"/> <!-- txt  -->
+					
+					<h:outputLabel value="telefone"/>  <!-- label -->
+					<p:inputText id="txtTelefone" value="#{crtCliente.model.telefone}"/> <!-- txt  -->
+					
+					<h:outputLabel value="email"/>  <!-- label -->
+					<p:inputText id="txtEmail" value="#{crtCliente.model.email}"/> <!-- txt  -->
+					
+					<h:outputLabel value="rua"/>  <!-- label -->
+					<p:inputText id="txtRua" value="#{crtCliente.model.endereco.rua}"/> <!-- txt  -->
+					
+					<p:commandButton value="OK" 
+						oncomplete="PF('dlg1').hide()" 
+						action="#{crtCliente.save()}"
+						update=":formTable"
+						/>
+					<p:commandButton value="Cancela"
+						oncomplete="PF('dlg1').hide()"/>
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+		<!-- /incluir--> 
+		
+		  <div class="section no-pad-bot" id="index-banner">
+   
+  		</div>
+  		
+		
+	</ui:define>
+	
+	
+</ui:composition>

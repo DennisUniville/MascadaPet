@@ -1,0 +1,55 @@
+<ui:composition template="/petshop/template/index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core"  >
+
+	<ui:define name="title">Cadastro de Cliente</ui:define>
+	
+	<ui:define name="content">
+		
+		<style>
+			#tbody {
+			}
+		</style>
+		
+	    
+	   <table id="cliente-table" class="bordered striped highlight responsive-table">
+        <thead>
+          <tr>
+              <th data-field="cpf">CPF</th>
+              <th data-field="nome">Nome</th>
+              <th data-field="telefone">Telefone</th>
+          </tr>
+        </thead>
+
+        <tbody id="tbody" >
+        </tbody>
+      </table>
+      
+	    
+	</ui:define>
+	
+	<ui:define name="customScripts">
+		<h:outputScript>
+	    	$(document).ready(function() {
+	    		$.ajax({
+        			url: "http://localhost:8080/MascadaREST/rest/Clientes/all",
+			    	contentType: "application/json; charset=utf-8",
+         			dataType: "json",
+			        success: function (data, status, jqXHR) {
+			        	$.each(data, function(i, item) {
+			        		$('<tr><td>' + item.cpf + '</td><td>' + 
+                        		item.nome + '</td><td>' + item.telefone + '</td></tr>').appendTo("#tbody");
+			        	});
+			         },
+			         error: function (jqXHR, status) {
+			             alert(status);
+			         }
+			     });
+	    	});
+	    </h:outputScript>
+	</ui:define>
+</ui:composition>

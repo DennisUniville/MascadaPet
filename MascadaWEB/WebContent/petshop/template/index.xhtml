@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+<h:head>
+  <h:outputStylesheet library="css" name="pet/icon.css"/>
+  <h:outputStylesheet library="css" name="materialize.min.css"/>
+  <h:outputStylesheet library="css" name="pet/style.css"/>
+  <h:outputStylesheet library="css" name="pet/plugins/perfect-scrollbar.css"/>
+  
+  <title><ui:insert name="title">Default title</ui:insert></title>
+  
+  <style type="text/css">
+	html {
+	  position: relative;
+	  min-height: 100%;
+	  height: auto;
+	}
+	body {
+	  margin-bottom: 60px;
+	  padding-bottom: 20px;
+	}
+	footer {
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  height: 50px;
+	}
+	 footer container {
+	   margin: 20px 0;
+	 }
+	.main-content {
+		position: inherit;
+		width: 80%;
+	}
+	@media only screen and (min-width : 986px) {
+		.main-content {
+			margin: 25px auto 0 300px;
+		}
+	}
+	@media only screen and (max-width : 985px) {
+		.main-content {
+			margin: 25px auto 0 auto;
+		}
+	}
+  </style>
+  
+  <!-- ENCONTRAR ICONES COMPATIVEIS: http://flatfull.com/themes/materil/html/ui.material.icon.html -->
+	     	
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+  
+</h:head>
+
+<body>
+<!-- Start Page Loading -->
+      <div id="loader-wrapper">
+          <div id="loader"></div>        
+          <div class="loader-section section-left"></div>
+          <div class="loader-section section-right"></div>
+      </div>
+      <!-- End Page Loading -->
+
+		<header id="header" class="page-topbar">
+	        <!-- start header nav-->
+	        <div class="navbar-fixed">
+	            <nav class="deep-purple lighten-1">
+	                <div class="nav-wrapper">                    
+	                    
+	                    <ul class="left">                      
+	                      <li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1"><h:graphicImage library="img" name="pet/petshop.png" /></a> <span class="logo-text">petshop</span></h1></li>
+	                    </ul>
+	                    <div class="header-search-wrapper hide-on-med-and-down">
+	                        <i class="mdi-action-search active"></i>
+	                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Busca no Sistema" />
+	                    </div>
+	                   
+	                    <ul class="right hide-on-med-and-down">                    
+	                        <li><a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse"><i class="mdi-communication-chat"></i></a>
+	                        </li> 
+	                    </ul> 
+	                </div>
+	            </nav>
+	        </div>
+	        <!-- end header nav-->
+	    </header>
+
+	    <!-- START MAIN -->
+	    <div id="main">
+	        <!-- START WRAPPER -->
+	        <div class="wrapper">
+	<!-- START LEFT SIDEBAR NAV-->
+	            <aside id="left-sidebar-nav">
+	                <ul id="slide-out" class="side-nav fixed leftside-navigation">
+	                    <li class="user-details deep-purple darken-4">
+	                        <div class="row">
+	                            <div class="col col s4 m4 l4">
+	                            	<h:graphicImage library="img" name="pet/avatar.jpg" styleClass="circle responsive-img valign profile-image"/>
+	                            </div>
+	                            <div class="col col s8 m8 l8">
+	                                <ul id="profile-dropdown" class="dropdown-content">
+	                                    <li><a href="#"><i class="mdi-action-face-unlock"></i> Perfil</a>
+	                                    </li>
+	                                    <li><a href="#"><i class="mdi-action-settings"></i> Config.</a>
+	                                    </li>
+	                                    <li><a href="#"><i class="mdi-communication-live-help"></i> Ajuda</a>
+	                                    </li>
+	                                    <li class="divider"></li>
+	                                    <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Sair</a>
+	                                    </li>
+	                                </ul>
+	                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">Dennis Borba<i class="mdi-navigation-arrow-drop-down right"></i></a>
+	                                <p class="user-roal">Administrador</p>
+	                            </div>
+	                        </div>
+	                    </li>
+	                    <li class="no-padding">
+	                        <ul class="collapsible collapsible-accordion">
+	                            <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-content-content-paste"></i> Cadastros</a>
+	                                <div class="collapsible-body">
+	                                    <ul>
+	                                        <li><a href="FrmCliente.xhtml">Cliente</a></li>
+											<li><a href="FrmEspecie.xhtml">Especie</a></li>
+											<li><a href="FrmRaca.xhtml">Raca</a></li>
+											<li><a href="FrmServico.xhtml">Servico</a></li>
+											<li><a href="FrmAnimal.xhtml">Animal</a></li>
+											<li><a href="FrmEndereco.xhtml">Endereco</a></li>
+											<li><a href="FrmChamado.xhtml">Chamado</a></li>
+											<li><a href="FrmFuncionario.xhtml">Funcionario</a></li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                            <li class="bold"><a href="" class="waves-effect waves-cyan"><i class="mdi-editor-insert-invitation"></i> Agenda</a>
+	                    		</li>
+	                            <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i> Servicos</a>	
+	                                <div class="collapsible-body">
+	                                    <ul>
+	                                        <li><a href="#">Banho</a>
+	                                        </li>
+	                                        <li><a href="#">Tosa</a>
+	                                        </li>
+	                                    </ul>
+	                                </div>
+	                            </li>                       
+		                     </ul>
+	                    </li>    
+	                    <li class="li-hover"><div class="divider"></div></li>
+	                    <li class="li-hover"><p class="ultra-small margin more-text">Atalhos</p></li>
+	                    <li><a href=""><i class="mdi-action-open-in-new"></i> Abrir Chamado</a>
+	                    </li>
+	                    <li><a href=""><i class="mdi-av-timer"></i> Agendar Horario</a>
+	                    </li>
+	                    <li><a href=""><i class="mdi-action-assignment-ind"></i> Consultar Cliente</a>
+	                    </li>
+	                    <li><a href=""><i class="mdi-action-find-in-page"></i> Consultar Animal</a>
+	                    </li>          
+	                    <li class="bold"><a href="" class="waves-effect waves-cyan"><i class="mdi-communication-email"></i> Email <span class="new badge red accent-3">4</span></a>
+	                    </li>          
+	                    <li class="li-hover"><div class="divider"></div></li>
+	                </ul>
+	                <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
+	            </aside>
+	            <!-- END LEFT SIDEBAR NAV-->
+
+
+
+	         <!-- END WRAPPER -->
+	        </div>
+
+	    <!-- END MAIN -->
+	    </div>
+
+	    <div class="main-content">
+			<ui:insert name="content">
+		    	Content area.  See comments below this line in the source.
+		  	</ui:insert>
+	    </div>
+	    <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+	    <!-- START FOOTER -->
+	    <footer class="page-footer deep-purple lighten-1">
+	    <div class="footer-copyright">
+	      <div class="container">
+	        <span>Copyright 2015 <a class="grey-text text-lighten-4" href="#" target="_blank">Corporacao Mascada</a> Todos os direitos reservados.</span>
+	        <span class="right"> Desenvolvido por <a class="grey-text text-lighten-4" href="#">Corporacao Mascada</a></span>
+	        </div>
+	    </div>
+	    </footer>
+	    <!-- END FOOTER -->
+	
+	<!--Import jQuery before materialize.js-->
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+	<h:outputScript library="js" name="jquery-2.1.1.min.js"></h:outputScript>
+    
+	<h:outputScript library="js" name="materialize.min.js"></h:outputScript>
+	<!-- ================================================
+    Scripts
+    ================================================ -->
+    <!--scrollbar	-->
+ 	<h:outputScript library="js" name="plugins/perfect-scrollbar.min.js"></h:outputScript>
+ 	
+    <!--plugins.js - Some Specific JS codes for Plugin Settings -->
+    <h:outputScript library="js" name="plugins.js" ></h:outputScript> 
+    
+    <ui:insert name="customScripts"></ui:insert>
+</body>
+
+</html>
