@@ -8,48 +8,61 @@
 
 	<ui:define name="title">Cadastro de Cliente</ui:define>
 	
+	<ui:define name="breadcrumbs-title">Clientes</ui:define>
+	
+	<ui:define name="breadcrumb">
+	  <li><a href="">Inicio</a></li>
+      <li><a href="">Cadastros</a></li>
+      <li class="active">Cliente</li>                       
+	</ui:define>
+	
 	<ui:define name="content">
-		
+
 		<style>
-			#tbody {
+			td:LAST-CHILD {
+				text-align: right;
+				magin: 0;
 			}
+			#tbody {
+			}			
+			#formTable {
+			    margin-top: 30px;
+			}		
+			#hearderForm {
+			}
+			.displayNone {
+				display: none;
+			}		
+			.rowButton {
+			}	
+			.cpf {
+			}	
 		</style>
 		
-	    
-	   <table id="cliente-table" class="bordered striped highlight responsive-table">
-        <thead>
-          <tr>
-              <th data-field="cpf">CPF</th>
-              <th data-field="nome">Nome</th>
-              <th data-field="telefone">Telefone</th>
-          </tr>
-        </thead>
-
-        <tbody id="tbody" >
-        </tbody>
-      </table>
-      
-	    
+		<p class="caption">Relação de Clientes cadastrados</p>		
+		<div class="divider"></div>
+                                
+		<h:form id="formTable" class="displayNone">
+			<div class="card-panel" onload="Materialize.fadeInImage('#tbody')">
+			   <table id="cliente-table" class="bordered striped hoverable responsive-table" >
+		        <thead>
+		          <tr>
+		              <th data-field="cpf">CPF</th>
+		              <th data-field="nome">Nome</th>
+		              <th data-field="telefone">Telefone</th>
+		          </tr>
+		        </thead>
+		
+		        <tbody id="tbody" >
+		        </tbody>
+		      </table> 
+			</div>
+			
+      	</h:form>
+	  
 	</ui:define>
 	
 	<ui:define name="customScripts">
-		<h:outputScript>
-	    	$(document).ready(function() {
-	    		$.ajax({
-        			url: "http://localhost:8080/MascadaREST/rest/Clientes/all",
-			    	contentType: "application/json; charset=utf-8",
-         			dataType: "json",
-			        success: function (data, status, jqXHR) {
-			        	$.each(data, function(i, item) {
-			        		$('<tr><td>' + item.cpf + '</td><td>' + 
-                        		item.nome + '</td><td>' + item.telefone + '</td></tr>').appendTo("#tbody");
-			        	});
-			         },
-			         error: function (jqXHR, status) {
-			             alert(status);
-			         }
-			     });
-	    	});
-	    </h:outputScript>
+		<h:outputScript library="js" name="customFrmCliente.js"></h:outputScript>
 	</ui:define>
 </ui:composition>
