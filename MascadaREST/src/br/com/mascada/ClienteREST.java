@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import dao.Cliente;
 import ejb.ClienteBeanLocal;
@@ -22,5 +23,12 @@ public class ClienteREST {
 	@Produces("application/json")
 	public List<Cliente> getAllClientes() {
 		return clienteBean.getTodosClientes();
+	}
+	
+	@GET
+	@Path("/cpf")
+	@Produces("application/json")
+	public Cliente getCliente(@QueryParam("param") String cpf) {
+		return clienteBean.getClientePorCPF(cpf);
 	}
 }

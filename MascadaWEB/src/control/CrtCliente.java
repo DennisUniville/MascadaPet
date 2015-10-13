@@ -50,6 +50,4 @@ public class CrtCliente {
 		this.clienteBean = clienteBean;
 	}
 	
-	
-	
 }

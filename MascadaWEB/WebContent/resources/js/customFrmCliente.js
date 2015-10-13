@@ -4,36 +4,59 @@
 
 
 $(document).ready(function() {
+	jQuery.fn.getREST = function(url, params, sucess, error) {
+		$.ajax({		
+			url: url,
+	    	contentType: "application/json; charset=utf-8",
+	    	data: params,
+			dataType: "json",
+	        success: function (data, status, jqXHR) {
+	        	sucess(data, status, jqXHR);
+	         },
+	         error: function (jqXHR, status) {
+	        	 error(jqXHR, status);
+	         }
+	     });	
+	}
+	
 	$.ajax({		
 		url: "http://localhost:8080/MascadaREST/rest/Clientes/all",
     	contentType: "application/json; charset=utf-8",
 		dataType: "json",
         success: function (data, status, jqXHR) {
         	$.each(data, function(i, cliente) {
-        		var $position = (i + 1).toString();
-        		var $htmlButton = "<ul id=\"dropdown" + $position + "\" class=\"dropdown-content\">" + 
-	        		"<li><a href=\"#!\" class=\"-text\">.zip</a></li>" +
-	                "<li><a href=\"#!\" class=\"-text\">.tar</a></li>" +
-	                "<li><a href=\"#!\" class=\"-text\">.exe</a></li></ul>" +
-	                "<a class=\"rowButton dropdown-button btn-floating btn-flat waves-effect waves-light pink white-text\" " + 
-	                "data-activates=\"dropdown" + $position + "\"><i class=\"mdi-editor-border-color\"></i></a>";
-        		
-        		$('<tr><td class="cpf" >' + cliente.cpf + '</td><td>' + 
-            		cliente.nome + '</td><td>' + cliente.telefone + '</td><td>' + $htmlButton + '</td></tr>').appendTo("#tbody");
+        		var $htmlButton = "<a class=\"botaoLinha btn-floating btn-flat waves-effect waves-light pink accent-2 \"><i class=\"mdi-editor-border-color\"></i></a>";    		
+             		$('<tr><td class="cpf" >' + cliente.cpf + '</td><td>' + 
+            		cliente.nome + '</td><td>' + cliente.telefone + '</td><td style="width: 1px; background-color: cyan; padding: 0;" class="btn-line">' + $htmlButton + '</td></tr>').appendTo("#tbody");
         	});
          },
          error: function (jqXHR, status) {
              alert(status);
          }
-     });
+     });	
 	
 	$('#formTable').removeClass('displayNone'); 
 	
-	$(".rowButton").click(function() {
-		alert('clicked');
-	    var $row = $(this).closest("tr");    // Find the row
-	    var $text = $row.find(".cpf").text(); // Find the text
-
-	    alert($text);
+	$("#tbody").delegate("td", "click", function(e) {
+		var myClass = $(this).attr("class");
+		if(myClass == 'btn-line') {
+			var CPF = $(this).closest('tr').find('td:nth-child(1)').text();
+			alert(CPF);
+			
+			$(this).getREST("http://localhost:8080/MascadaREST/rest/Clientes/cpf", 
+					{ param : CPF },
+				function(data, status, jqXHR) {
+					$.each(data, function(i, cliente) {
+						alert('Cliente: ' + cliente.nome)
+					});
+				}, function(jqXHR, status) {
+					alert('Error: ' + status);
+				} 
+			);
+		}
 	});
+
+	
+	
+	
 });

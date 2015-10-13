@@ -29,26 +29,24 @@ public class ClienteBean implements ClienteBeanLocal {
 
 	@Override
 	public List<Cliente> getTodosClientes() {
-		Query q = em.createNamedQuery("todosClientes");
-		
+		Query q = em.createNamedQuery("todosClientes");	
 		List<Cliente> colResult = q.getResultList();
-		System.out.println("VOLTOUUUUUUUUUUUUUUUUUUUUU  " +colResult.size());
 		return colResult;
-
-	
 	}
 
 	@Override
 	public List<Cliente> getTodosClientesPorId(long oid) {
-		System.out.println("Pelo menos passou aqui...");
 		return null;
 	}
 
 	@Override
-	public List<Cliente> getTodosClientesPorCpf(String cpf) {
-		// TODO Auto-generated method stub
-		return null;
+	public Cliente getClientePorCPF(String cpf) {
+		Query q = em.createNamedQuery("clientePorCPF")
+				.setParameter("cpf", cpf); 
+		Cliente cliente = (Cliente) q.getSingleResult();
+		return cliente;
 	}
+	
 	@Override
 	public List<Cliente> getTodosClientesPorNome(String nome) {
 		// TODO Auto-generated method stub
@@ -66,15 +64,7 @@ public class ClienteBean implements ClienteBeanLocal {
 	}
 	
 	@Override
-	public void save(Cliente cliente){
-		Endereco endereco = cliente.getEndereco();
-		
-//		if(em.find(Endereco.class, endereco.getOid()) == null) {
-//			
-//		} else {
-//
-//		}
-		
+	public void save(Cliente cliente){	
 		if(em.find(Cliente.class, cliente.getOid()) == null){
 			em.persist(cliente);
 		}else{

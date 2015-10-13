@@ -15,8 +15,9 @@ import javax.persistence.OneToOne;
 	@NamedQuery(name="todosClientes",
 			query="Select c from Cliente c"),
 	@NamedQuery(name="todosClientesPorId",
-			query="Select c from Cliente c where c.oid = :oid")
-	
+			query="Select c from Cliente c where c.oid = :oid"),
+	@NamedQuery(name="clientePorCPF",
+		query="Select c from Cliente c where c.cpf = :cpf")
 })
 
 
