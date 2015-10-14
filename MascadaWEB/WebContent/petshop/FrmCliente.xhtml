@@ -24,11 +24,8 @@
 			.displayNone {
 				display: none;
 			}		
-			.rowButton {
-			}	
-			.cpf {
-			}	
-			.botaoLinha {
+			#dlgClienteDetalhe a:FIRST-CHILD {
+				margin-right: 2px;
 			}
 		</style>
 	</ui:define>
@@ -61,6 +58,31 @@
 		        </tbody>
 		      </table> 
 			</div>			
+      	</h:form>
+      		<div id="dlgClienteDetalhe" class="modal" style="display: none; opacity: 1; top: 0px;">
+                <div class="modal-content">
+                  <div class="row">
+					    <form id="formCliente" class="col s12">
+					      <div class="row">
+					        <div class="input-field col s6">
+					          <input id="first_name" type="text" class="validate" />
+					          <label for="first_name">Nome</label>
+					        </div>
+					        <div class="input-field col s6">
+					          <input id="last_name" type="text" class="validate" />
+					          <label for="last_name">Sobrenome</label>
+					        </div>
+					      </div>
+					     </form>
+					  </div>
+                </div>
+                <div class="modal-footer deep-purple lighten-1">
+                  <a class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="">Cancelar</a>
+                  <a class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="">Salvar</a>
+                </div>
+              </div>
+      	<h:form>
+      		
       	</h:form>
 	  
 	</ui:define>

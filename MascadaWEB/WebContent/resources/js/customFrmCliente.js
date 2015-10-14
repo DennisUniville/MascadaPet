@@ -25,9 +25,9 @@ $(document).ready(function() {
 		dataType: "json",
         success: function (data, status, jqXHR) {
         	$.each(data, function(i, cliente) {
-        		var $htmlButton = "<a class=\"botaoLinha btn-floating btn-flat waves-effect waves-light pink accent-2 \"><i class=\"mdi-editor-border-color\"></i></a>";    		
+        		var $htmlButton = "<a class=\"botaoLinha btn-floating btn-flat waves-effect waves-light pink accent-2 \" ><i class=\"mdi-editor-border-color\"></i></a>";    		
              		$('<tr><td class="cpf" >' + cliente.cpf + '</td><td>' + 
-            		cliente.nome + '</td><td>' + cliente.telefone + '</td><td style="width: 1px; background-color: cyan; padding: 0;" class="btn-line">' + $htmlButton + '</td></tr>').appendTo("#tbody");
+            		cliente.nome + '</td><td>' + cliente.telefone + '</td><td style="width: 1px; padding: 0;" class="btn-line">' + $htmlButton + '</td></tr>').appendTo("#tbody");
         	});
          },
          error: function (jqXHR, status) {
@@ -41,14 +41,13 @@ $(document).ready(function() {
 		var myClass = $(this).attr("class");
 		if(myClass == 'btn-line') {
 			var CPF = $(this).closest('tr').find('td:nth-child(1)').text();
-			alert(CPF);
 			
 			$(this).getREST("http://localhost:8080/MascadaREST/rest/Clientes/cpf", 
 					{ param : CPF },
-				function(data, status, jqXHR) {
-					$.each(data, function(i, cliente) {
-						alert('Cliente: ' + cliente.nome)
-					});
+				function(data, status, jqXHR) {		
+					$('#formCliente').find("input#last_name").toggleClass('active').val('teste');
+					
+					$('#dlgClienteDetalhe').openModal();
 				}, function(jqXHR, status) {
 					alert('Error: ' + status);
 				} 
