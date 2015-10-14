@@ -45,7 +45,11 @@ $(document).ready(function() {
 			$(this).getREST("http://localhost:8080/MascadaREST/rest/Clientes/cpf", 
 					{ param : CPF },
 				function(data, status, jqXHR) {		
-					$('#formCliente').find("input#last_name").toggleClass('active').val('teste');
+					var nome = data.nome;
+					
+					$('#formCliente').find("input#first_name").val(data.nome);
+					if(nome != '')
+						$('#lbl-first-name').toggleClass('active');
 					
 					$('#dlgClienteDetalhe').openModal();
 				}, function(jqXHR, status) {
