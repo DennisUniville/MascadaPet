@@ -3,7 +3,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" 
 	xmlns:c="http://java.sun.com/jsp/jstl/core"  >
 
 	<ui:define name="title">Cadastro de Cliente</ui:define>
@@ -44,7 +43,7 @@
 		<div class="divider"></div>
                                 
 		<h:form id="formTable" class="displayNone">
-			<div class="card-panel" onload="Materialize.fadeInImage('#tbody')">
+			<div id="card-clientes" class="card-panel" onload="Materialize.fadeInImage('#tbody')">
 			   <table id="cliente-table" class="bordered striped hoverable responsive-table" >
 		        <thead>
 		          <tr>
@@ -63,7 +62,7 @@
 		<div id="dlgClienteDetalhe" class="modal" style="display: none; opacity: 1; top: 0px;">
 			<div class="modal-content">
 				<div class="row">
-					<form id="formCliente" class="col s12">
+					<h:form id="formCliente" class="col s12">
 						<p class="caption">Dados do Cliente:</p>	
 		
 						<div class="row">
@@ -128,13 +127,19 @@
 						</div>
 		
 						<div class="row">
-							<a id="cancelar-alteracao" class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="" >Cancelar</a>
-							<a id="confirmar-alteracao" class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="">Salvar</a>
+							<a  class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="" >Cancelar</a>
+							<!-- <a id="confirmar-alteracao" class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="">Salvar</a> -->
+							
+							<h:commandLink value="Salvar" actionListener="#{crtCliente.save}" action="#{crtCliente.atualizaPagina}" immediate="true"
+								styleClass="waves-effect waves-light btn modal-action modal-close pink accent-2">
+								<!-- <f:ajax event="action" execute="formCliente" render="@form" immediate="true"/> -->
+							</h:commandLink>
 						</div>
-					</form>
+					</h:form>
 				</div>			  
 			</div>
 		</div>
+	  
 	  
 	</ui:define>
 	

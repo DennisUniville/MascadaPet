@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import dao.Cliente;
 import dao.Endereco;
@@ -27,10 +28,14 @@ public class CrtCliente {
 		model= new Cliente();
 		model.setEndereco(new Endereco());
 	}
-	public void save(){
+	public void save(ActionEvent event){
 		clienteBean.save(model);
 	}
-
+	
+	public String atualizaPagina() {
+		return "FrmCliente.xhtml";
+	}
+	
 	public ClienteBeanLocal getClienteBean() {
 		return clienteBean;
 	}
