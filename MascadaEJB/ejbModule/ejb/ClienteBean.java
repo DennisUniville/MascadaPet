@@ -44,6 +44,8 @@ public class ClienteBean implements ClienteBeanLocal {
 		Query q = em.createNamedQuery("clientePorCPF")
 				.setParameter("cpf", cpf); 
 		Cliente cliente = (Cliente) q.getSingleResult();
+		if(cliente.getEndereco() == null)
+			cliente.setEndereco(new Endereco());
 		return cliente;
 	}
 	

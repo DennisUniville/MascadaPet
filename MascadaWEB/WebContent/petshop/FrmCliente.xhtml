@@ -21,12 +21,12 @@
 			}		
 			#hearderForm {
 			}
+			#dlgClienteDetalhe .caption {
+	      		margin-bottom: 0;
+	      	}
 			.displayNone {
 				display: none;
 			}		
-			#dlgClienteDetalhe a:FIRST-CHILD {
-				margin-right: 2px;
-			}
 		</style>
 	</ui:define>
 	
@@ -59,31 +59,82 @@
 		      </table> 
 			</div>			
       	</h:form>
-      		<div id="dlgClienteDetalhe" class="modal" style="display: none; opacity: 1; top: 0px;">
-                <div class="modal-content">
-                  <div class="row">
-					    <form id="formCliente" class="col s12">
-					      <div class="row">
-					        <div class="input-field col s6">
-					          <input id="first_name" type="text" class="validate" />
-					          <label id="lbl-first-name" for="first_name">Nome</label>
-					        </div>
-					        <div class="input-field col s6">
-					          <input id="last_name" type="text" class="validate" />
-					          <label for="last_name">Sobrenome</label>
-					        </div>
-					      </div>
-					     </form>
-					  </div>
-                </div>
-                <div class="modal-footer deep-purple lighten-1">
-                  <a class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="">Cancelar</a>
-                  <a class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="">Salvar</a>
-                </div>
-              </div>
-      	<h:form>
-      		
-      	</h:form>
+      	
+		<div id="dlgClienteDetalhe" class="modal" style="display: none; opacity: 1; top: 0px;">
+			<div class="modal-content">
+				<div class="row">
+					<form id="formCliente" class="col s12">
+						<p class="caption">Dados do Cliente:</p>	
+		
+						<div class="row">
+							<div class="input-field col s2">
+								<input id="codigo" disabled="true" type="text" class="validate"></input>
+								<label id="lbl-codigo" for="codigo">Codigo</label>
+							</div>
+		
+							<div class="input-field col s7">
+								<input id="nome" type="text" class="validate" ></input>
+								<label id="lbl-nome" for="nome">Nome</label>
+							</div>
+		
+							<div class="input-field col s3">
+								<input id="cpf" type="text" class="validate" ></input>
+								<label id="lbl-cpf" for="cpf">CPF</label>
+							</div>
+						</div>
+		
+						<div class="row">
+							<div class="input-field col s6">
+								<input id="telefone" type="text" class="validate"></input>
+								<label id="lbl-telefone" for="telefone">Telefone</label>
+							</div>
+		
+							<div class="input-field col s6">
+								<input id="email" type="email" class="validate" ></input>
+								<label id="lbl-email" for="email">Email</label>
+							</div>
+						</div>
+		
+						<p class="caption">Endereco:</p>	
+		
+						<div class="row">
+							<div class="input-field col s8">
+								<input id="rua" type="text" class="validate"></input>
+								<label  id="lbl-rua" for="rua">Rua</label>
+							</div>
+		
+							<div class="input-field col s4">
+								<input id="numero" type="text" class="validate" ></input>
+								<label id="lbl-numero" for="numero">Numero</label>
+							</div>
+						</div>
+		
+		
+						<div class="row">
+							<div class="input-field col s4">
+								<input id="complemento" type="text" class="validate"></input>
+								<label  id="lbl-complemento" for="complemento">Complemento</label>
+							</div>
+		
+							<div class="input-field col s6">
+								<input id="bairro" type="text" class="validate" ></input>
+								<label id="lbl-bairro" for="bairro">Bairro</label>
+							</div>
+		
+							<div class="input-field col s2">
+								<input id="cep" type="text" class="validate" ></input>
+								<label id="lbl-cep" for="last_name">CEP</label>
+							</div>
+						</div>
+		
+						<div class="row">
+							<a id="cancelar-alteracao" class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="" >Cancelar</a>
+							<a id="confirmar-alteracao" class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="">Salvar</a>
+						</div>
+					</form>
+				</div>			  
+			</div>
+		</div>
 	  
 	</ui:define>
 	

@@ -36,18 +36,18 @@ public class Cliente {
 	@Column(length=500)
 	private String telefone;
 	
-	public String getTelefone() {
-		return telefone;
-	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
 	@Column(length=500)
 	private String email;
 	
 	@OneToOne(cascade=CascadeType.PERSIST)
 	private Endereco endereco;
 	
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 	public Endereco getEndereco() {
 		return endereco;
 	}
