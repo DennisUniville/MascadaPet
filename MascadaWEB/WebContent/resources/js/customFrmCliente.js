@@ -85,7 +85,7 @@ $(document).ready(function() {
 						$(this).toggleClassCustom('#formCliente\\:lbl-bairro', 'active', (typeof endereco.bairro !== 'undefined'));
 						
 						$('#formCliente').find("#formCliente\\:cep").val(endereco.cep);	
-						$(this).toggleClassCustom('#formCliente\\:lbl-cep', 'active', (typeof endereco.cep !== 'undefined'));
+						$(this).toggleClassCustom('#formCliente\\:lbl-cep', 'active', (typeof endereco.cep !== 'undefined'));   
 				    }); 
 					
 					$('#dlgClienteDetalhe').openModal();
