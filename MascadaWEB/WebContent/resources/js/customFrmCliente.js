@@ -56,8 +56,8 @@ $(document).ready(function() {
 					{ param : CPF },
 				function(cliente, status, jqXHR) {	
 					
-					$('#formCliente').find("input#codigo").val(cliente.oid);	
-					$(this).toggleClassCustom('#lbl-codigo', 'active', (typeof cliente.oid !== 'undefined'));
+					$('#formCliente').find("#formCliente\\:codigo").val(cliente.oid);	
+					$(this).toggleClassCustom('#formCliente\\:lbl-codigo', 'active', (typeof cliente.oid !== 'undefined'));
 					
 					$('#formCliente').find("input#nome").val(cliente.nome);	
 					$(this).toggleClassCustom('#lbl-nome', 'active', (typeof cliente.nome !== 'undefined'));
