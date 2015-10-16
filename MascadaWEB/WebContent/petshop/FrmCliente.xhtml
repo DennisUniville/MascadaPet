@@ -69,7 +69,7 @@
 							<div class="input-field col s2">
 								<!-- <input id="codigo" disabled="true" type="text" class="validate"></input>
 								<label id="lbl-codigo" for="codigo">Codigo</label> -->					
-								<h:inputText id="codigo" disabled="true" styleClass="validate"></h:inputText>
+								<h:inputText id="codigo" disabled="true" styleClass="validate" value="#{crtCliente.model.oid}" ></h:inputText>
 								<h:outputLabel id="lbl-codigo" for="codigo" value="Codigo"></h:outputLabel>
 							</div>
 		
@@ -77,7 +77,7 @@
 								<!-- <input id="nome" type="text" class="validate" ></input>
 								<label id="lbl-nome" for="nome">Nome</label> -->
 								
-								<h:inputText id="nome" styleClass="validate"></h:inputText>
+								<h:inputText id="nome" styleClass="validate" value="#{crtCliente.model.nome}" ></h:inputText>
 								<h:outputLabel id="lbl-nome" for="nome" value="Nome"></h:outputLabel>
 							</div>
 		
@@ -85,7 +85,7 @@
 								<!-- <input id="cpf" type="text" class="validate" ></input>
 								<label id="lbl-cpf" for="cpf">CPF</label> -->
 								
-								<h:inputText id="cpf" styleClass="validate"></h:inputText>
+								<h:inputText id="cpf" styleClass="validate" value="#{crtCliente.model.cpf}" ></h:inputText>
 								<h:outputLabel id="lbl-cpf" for="cpf" value="CPF"></h:outputLabel>
 							</div>
 						</div>
@@ -95,7 +95,7 @@
 								<!-- <input id="telefone" type="text" class="validate"></input>
 								<label id="lbl-telefone" for="telefone">Telefone</label> -->
 								
-								<h:inputText id="telefone" styleClass="validate"></h:inputText>
+								<h:inputText id="telefone" styleClass="validate" value="#{crtCliente.model.telefone}" ></h:inputText>
 								<h:outputLabel id="lbl-telefone" for="telefone" value="Telefone"></h:outputLabel>
 							</div>
 		
@@ -103,7 +103,7 @@
 								<!-- <input id="email" type="email" class="validate" ></input>
 								<label id="lbl-email" for="email">Email</label> -->
 								
-								<h:inputText id="email" styleClass="validate"></h:inputText>
+								<h:inputText id="email" styleClass="validate" value="#{crtCliente.model.email}" ></h:inputText>
 								<h:outputLabel id="lbl-email" for="email" value="Email"></h:outputLabel>
 							</div>
 						</div>
@@ -115,7 +115,7 @@
 								<!-- <input id="rua" type="text" class="validate"></input>
 								<label  id="lbl-rua" for="rua">Rua</label> -->
 								
-								<h:inputText id="rua" styleClass="validate"></h:inputText>
+								<h:inputText id="rua" styleClass="validate" value="#{crtCliente.model.endereco.rua}" ></h:inputText>
 								<h:outputLabel id="lbl-rua" for="rua" value="Rua"></h:outputLabel>
 							</div>
 		
@@ -123,7 +123,7 @@
 								<!-- <input id="numero" type="text" class="validate" ></input>
 								<label id="lbl-numero" for="numero">Numero</label> -->
 								
-								<h:inputText id="numero" styleClass="validate"></h:inputText>
+								<h:inputText id="numero" styleClass="validate" value="#{crtCliente.model.endereco.numero}" ></h:inputText>
 								<h:outputLabel id="lbl-numero" for="numero" value="Numero"></h:outputLabel>
 							</div>
 						</div>
@@ -134,7 +134,7 @@
 								<!-- <input id="complemento" type="text" class="validate"></input>
 								<label  id="lbl-complemento" for="complemento">Complemento</label> -->
 								
-								<h:inputText id="complemento" styleClass="validate"></h:inputText>
+								<h:inputText id="complemento" styleClass="validate" value="#{crtCliente.model.endereco.complemento}" ></h:inputText>
 								<h:outputLabel id="lbl-complemento" for="complemento" value="Complemento"></h:outputLabel>
 							</div>
 		
@@ -142,7 +142,7 @@
 								<!-- <input id="bairro" type="text" class="validate" ></input>
 								<label id="lbl-bairro" for="bairro">Bairro</label> -->
 								
-								<h:inputText id="bairro" styleClass="validate"></h:inputText>
+								<h:inputText id="bairro" styleClass="validate" value="#{crtCliente.model.endereco.bairro}" ></h:inputText>
 								<h:outputLabel id="lbl-bairro" for="bairro" value="Bairro"></h:outputLabel>
 							</div>
 		
@@ -150,8 +150,8 @@
 								<!-- <input id="cep" type="text" class="validate" ></input>
 								<label id="lbl-cep" for="cep">CEP</label> -->
 								
-								<h:inputText id="cep" styleClass="validate"></h:inputText>
-								<h:outputLabel id="lbl-cep" for="cep" value="CEP"></h:outputLabel>
+								<h:inputText id="cep" styleClass="validate" value="#{crtCliente.model.endereco.cep}" ></h:inputText>
+								<h:outputLabel id="lbl-cep" for="cep" value="CEP" ></h:outputLabel>
 							</div>
 						</div>
 		
@@ -159,9 +159,9 @@
 							<a  class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="" >Cancelar</a>
 							<!-- <a id="confirmar-alteracao" class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="">Salvar</a> -->
 							
-							<h:commandLink value="Salvar" actionListener="#{crtCliente.save}" action="#{crtCliente.atualizaPagina}" immediate="true"
-								styleClass="waves-effect waves-light btn modal-action modal-close pink accent-2">
-								<!-- <f:ajax event="action" execute="formCliente" render="@form" immediate="true"/> -->
+							<h:commandLink value="Salvar" actionListener="#{crtCliente.save}" onclick="$(this).atualizaClientes();"
+								styleClass="waves-effect waves-light btn modal-action modal-close pink accent-2" >
+								<f:ajax event="action" execute="formCliente" />
 							</h:commandLink>
 						</div>
 					</h:form>

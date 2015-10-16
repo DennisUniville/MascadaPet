@@ -1,6 +1,5 @@
 package control;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -19,21 +18,16 @@ public class CrtCliente {
 	
 	private Cliente model = new Cliente();
 	
-	@PostConstruct
-    public void init(){
-         
-    }
-	
 	public void createNewCliente(){
 		model= new Cliente();
 		model.setEndereco(new Endereco());
 	}
 	public void save(ActionEvent event){
+		System.out.println("METODO SAVE");
+		System.out.println(model.getOid());
+		System.out.println(model.getNome());
+		System.out.println(model.getCpf());
 		clienteBean.save(model);
-	}
-	
-	public String atualizaPagina() {
-		return "FrmCliente.xhtml";
 	}
 	
 	public ClienteBeanLocal getClienteBean() {
