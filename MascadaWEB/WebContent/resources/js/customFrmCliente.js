@@ -59,33 +59,33 @@ $(document).ready(function() {
 					$('#formCliente').find("#formCliente\\:codigo").val(cliente.oid);	
 					$(this).toggleClassCustom('#formCliente\\:lbl-codigo', 'active', (typeof cliente.oid !== 'undefined'));
 					
-					$('#formCliente').find("input#nome").val(cliente.nome);	
-					$(this).toggleClassCustom('#lbl-nome', 'active', (typeof cliente.nome !== 'undefined'));
+					$('#formCliente').find("#formCliente\\:nome").val(cliente.nome);	
+					$(this).toggleClassCustom('#formCliente\\:lbl-nome', 'active', (typeof cliente.nome !== 'undefined'));
 					
-					$('#formCliente').find("input#cpf").val(cliente.cpf);	
-					$(this).toggleClassCustom('#lbl-cpf', 'active', (typeof cliente.cpf !== 'undefined'));
+					$('#formCliente').find("#formCliente\\:cpf").val(cliente.cpf);	
+					$(this).toggleClassCustom('#formCliente\\:lbl-cpf', 'active', (typeof cliente.cpf !== 'undefined'));
 					
-					$('#formCliente').find("input#telefone").val(cliente.telefone);	
-					$(this).toggleClassCustom('#lbl-telefone', 'active', (typeof cliente.telefone !== 'undefined'));
+					$('#formCliente').find("#formCliente\\:telefone").val(cliente.telefone);	
+					$(this).toggleClassCustom('#formCliente\\:lbl-telefone', 'active', (typeof cliente.telefone !== 'undefined'));
 					
-					$('#formCliente').find("input#email").val(cliente.email);
-					$(this).toggleClassCustom('#lbl-email', 'active', (typeof cliente.email !== 'undefined'));
+					$('#formCliente').find("#formCliente\\:email").val(cliente.email);
+					$(this).toggleClassCustom('#formCliente\\:lbl-email', 'active', (typeof cliente.email !== 'undefined'));
 					
 					$.each(cliente.endereco , function(i , endereco ){  
-						$('#formCliente').find("input#rua").val(endereco.rua);	
-						$(this).toggleClassCustom('#lbl-rua', 'active', (typeof endereco.rua !== 'undefined'));
+						$('#formCliente').find("#formCliente\\:rua").val(endereco.rua);	
+						$(this).toggleClassCustom('#formCliente\\:lbl-rua', 'active', (typeof endereco.rua !== 'undefined'));
 						
-						$('#formCliente').find("input#numero").val(endereco.numero);
-						$(this).toggleClassCustom('#lbl-numero', 'active', (typeof endereco.numero !== 'undefined'));
+						$('#formCliente').find("#formCliente\\:numero").val(endereco.numero);
+						$(this).toggleClassCustom('#formCliente\\:lbl-numero', 'active', (typeof endereco.numero !== 'undefined'));
 						
-						$('#formCliente').find("input#complemento").val(endereco.complemento);	
-						$(this).toggleClassCustom('#lbl-complemento', 'active', (typeof endereco.complemento !== 'undefined'));
+						$('#formCliente').find("#formCliente\\:complemento").val(endereco.complemento);	
+						$(this).toggleClassCustom('#formCliente\\:lbl-complemento', 'active', (typeof endereco.complemento !== 'undefined'));
 						
-						$('#formCliente').find("input#bairro").val(endereco.bairro);	
-						$(this).toggleClassCustom('#lbl-bairro', 'active', (typeof endereco.bairro !== 'undefined'));
+						$('#formCliente').find("#formCliente\\:bairro").val(endereco.bairro);	
+						$(this).toggleClassCustom('#formCliente\\:lbl-bairro', 'active', (typeof endereco.bairro !== 'undefined'));
 						
-						$('#formCliente').find("input#cep").val(endereco.cep);	
-						$(this).toggleClassCustom('#lbl-cep', 'active', (typeof endereco.cep !== 'undefined'));
+						$('#formCliente').find("#formCliente\\:cep").val(endereco.cep);	
+						$(this).toggleClassCustom('#formCliente\\:lbl-cep', 'active', (typeof endereco.cep !== 'undefined'));
 				    }); 
 					
 					$('#dlgClienteDetalhe').openModal();
