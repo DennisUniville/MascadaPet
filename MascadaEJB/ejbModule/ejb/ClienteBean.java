@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -23,8 +24,6 @@ public class ClienteBean implements ClienteBeanLocal {
      * Default constructor. 
      */
     public ClienteBean() {
-        // TODO Auto-generated constructor stub
-    	System.out.println("fui criado!!!");
     }
 
 	@Override
@@ -40,10 +39,17 @@ public class ClienteBean implements ClienteBeanLocal {
 	}
 
 	@Override
-	public Cliente getClientePorCPF(String cpf) {
+	public Cliente getClientePorCPF(String cpf) throws NoResultException {
 		Query q = em.createNamedQuery("clientePorCPF")
 				.setParameter("cpf", cpf); 
-		Cliente cliente = (Cliente) q.getSingleResult();
+		Cliente cliente;
+		try {
+			cliente = (Cliente) q.getSingleResult();
+		} catch (Exception e) {
+			System.err.println("cpf:" + cpf + " " + e.getMessage() + " | "  + e.getCause());
+			return null;
+		}
+		
 		if(cliente.getEndereco() == null)
 			cliente.setEndereco(new Endereco());
 		return cliente;

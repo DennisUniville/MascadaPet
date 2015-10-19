@@ -28,7 +28,7 @@ $(document).ready(function() {
 		}
 	}
 	
-	jQuery.fn.atualizaClientes = function() {
+	jQuery.fn.atualizaClientes = function() {		
 		$.ajax({		
 			url: "http://localhost:8080/MascadaREST/rest/Clientes/all",
 	    	contentType: "application/json; charset=utf-8",
@@ -45,13 +45,23 @@ $(document).ready(function() {
 	         }
 	     });
 		
-		$('.displayNone').css({
-			'display' : 'block'
-		});
+		$('#formTable').removeClass('displayNone'); 
 	}
 		
+	$("#cliente-table tr td:LAST-CHILD").css({
+			'width' : '1px', 
+			'padding' : '0'
+		})
+		.addClass('btn-line');
+
+	
+	
+	jQuery.fn.refreshClientes = function() {
+		$("#formTable tbody").html("");
+		$(this).atualizaClientes();
+	}
+	
 	$(this).atualizaClientes();
-	$('#formTable').removeClass('displayNone'); 
 	
 	
 	$("#tbody").delegate("td", "click", function(e) {

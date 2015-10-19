@@ -15,7 +15,7 @@
 			}
 			#tbody {
 			}			
-			#formTable {
+			#card-clientes {
 			    margin-top: 30px;
 			}		
 			#hearderForm {
@@ -42,22 +42,30 @@
 		<p class="caption">Relação de Clientes cadastrados</p>		
 		<div class="divider"></div>
                                 
-		<h:form id="formTable" class="displayNone">
-			<div id="card-clientes" class="card-panel" onload="Materialize.fadeInImage('#tbody')">
-			   <table id="cliente-table" class="bordered striped hoverable responsive-table" >
-		        <thead>
-		          <tr>
-		              <th data-field="cpf">CPF</th>
-		              <th data-field="nome">Nome</th>
-		              <th data-field="telefone">Telefone</th>
-		          </tr>
-		        </thead>
-		
-		        <tbody id="tbody" >
-		        </tbody>
-		      </table> 
-			</div>			
-      	</h:form>
+		<div id="card-clientes" class="card-panel" onload="Materialize.fadeInImage('#cliente-table')">	      
+	      <h:dataTable id="cliente-table" styleClass="bordered striped hoverable responsive-table"
+	      		value="#{crtCliente.clienteBean.getTodosClientes()}" var="cliente"  binding="#{crtCliente.dataTable}">
+	      	<h:column>
+	      		<f:facet name="header">CPF</f:facet>
+	      		#{cliente.cpf}
+	      	</h:column>
+	      	
+	      	<h:column>
+	      		<f:facet name="header">Nome</f:facet>
+	      		#{cliente.nome}
+	      	</h:column>
+	      	
+	      	<h:column>
+	      		<f:facet name="header">Telefone</f:facet>
+	      		#{cliente.telefone}
+	      	</h:column>
+	      	
+	      	<h:column>
+	      		<a class="btn-floating btn-flat waves-effect waves-light pink accent-2 " ><i class="mdi-editor-border-color"></i></a>
+	      	</h:column>
+
+	      </h:dataTable>
+		</div>			
       	
 		<div id="dlgClienteDetalhe" class="modal" style="display: none; opacity: 1; top: 0px;">
 			<div class="modal-content">
@@ -144,6 +152,6 @@
 	</ui:define>
 	
 	<ui:define name="customScripts">
-		<h:outputScript library="js" name="customFrmCliente.js"></h:outputScript>
+<!-- 		<h:outputScript library="js" name="customFrmCliente2.js"></h:outputScript> -->
 	</ui:define>
 </ui:composition>
