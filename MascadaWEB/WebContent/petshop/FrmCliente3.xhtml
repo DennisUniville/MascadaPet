@@ -46,7 +46,8 @@
          <h:form id="form-table">
          	<div id="card-clientes" class="card-panel" onload="Materialize.fadeInImage('#cliente-table')">	      
 		      <h:dataTable id="cliente-table" styleClass="bordered striped hoverable responsive-table"
-		      		value="#{crtCliente.clienteBean.getTodosClientes()}" var="cliente"  binding="#{crtCliente.dataTable}">
+		      		value="#{crtCliente.clienteBean.getTodosClientes()}" var="cliente"  binding="#{crtCliente.dataTable}"
+		      		>
 		      	<h:column>
 		      		<f:facet name="header">CPF</f:facet>
 		      		#{cliente.cpf}
@@ -65,13 +66,20 @@
 		      	<h:column>
 		      		<h:commandLink styleClass="btn-floating btn-flat waves-effect waves-light pink accent-2" 
 		      			actionListener="#{crtCliente.selecionarCliente}">
-		      			<f:ajax event="action" render="formCliente" onevent="$(this).atualizaModal"/>
+		      			<f:ajax event="action" render=":formCliente" onevent="$(this).atualizaModal"/>
 		      			<i class="mdi-editor-border-color"></i>
 		      		</h:commandLink>
 		      	</h:column>
 	
 		      </h:dataTable>
-			</div>	
+		      
+		      <div class="col s12">
+	      		<div class="col s10"></div>
+	      		<div class="col s2">
+	      			<a class="waves-effect waves-light  btn">button</a>
+	      		</div>
+		      </div>
+		     </div>
          </h:form>                       			
       	
 		<div id="dlgClienteDetalhe" class="modal" style="display: none; opacity: 1; top: 0px;">
@@ -113,12 +121,12 @@
 		
 						<div class="row">
 							<div class="input-field col s8">
-								<h:inputText id="rua" styleClass="validate" value="#{crtCliente.enderecoModel.rua}" ></h:inputText>
+								<h:inputText id="rua" styleClass="validate" value="#{crtCliente.model.endereco.rua}" label="lbl-rua" ></h:inputText>
 								<h:outputLabel id="lbl-rua" for="rua" value="Rua"></h:outputLabel>
 							</div>
 		
 							<div class="input-field col s4">
-								<h:inputText id="numero" styleClass="validate" value="#{crtCliente.enderecoModel.numero}" ></h:inputText>
+								<h:inputText id="numero" styleClass="validate" value="#{crtCliente.model.endereco.numero}" label="lbl-numero" ></h:inputText>
 								<h:outputLabel id="lbl-numero" for="numero" value="Numero"></h:outputLabel>
 							</div>
 						</div>
@@ -126,28 +134,26 @@
 		
 						<div class="row">
 							<div class="input-field col s4">
-								<h:inputText id="complemento" styleClass="validate" value="#{crtCliente.enderecoModel.complemento}" ></h:inputText>
+								<h:inputText id="complemento" styleClass="validate" value="#{crtCliente.model.endereco.complemento}" label="lbl-complemento" ></h:inputText>
 								<h:outputLabel id="lbl-complemento" for="complemento" value="Complemento"></h:outputLabel>
 							</div>
 		
 							<div class="input-field col s6"> 
-								<h:inputText id="bairro" styleClass="validate" value="#{crtCliente.enderecoModel.bairro}" ></h:inputText>
+								<h:inputText id="bairro" styleClass="validate" value="#{crtCliente.model.endereco.bairro}" label="lbl-bairro" ></h:inputText>
 								<h:outputLabel id="lbl-bairro" for="bairro" value="Bairro"></h:outputLabel>
 							</div>
 		
 							<div class="input-field col s2">
-								<h:inputText id="cep" styleClass="validate" value="#{crtCliente.enderecoModel.cep}" ></h:inputText>
+								<h:inputText id="cep" styleClass="validate" value="#{crtCliente.model.endereco.cep}" label="lbl-cep" ></h:inputText>
 								<h:outputLabel id="lbl-cep" for="cep" value="CEP" ></h:outputLabel>
 							</div>
 						</div>
 		
 						<div class="row">
-							<a  class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="" >Cancelar</a>
-							<!-- <a id="confirmar-alteracao" class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="">Salvar</a> -->
-							
+							<a  class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="" >Cancelar</a>							
 							<h:commandLink value="Salvar" action="#{crtCliente.save}"
 								styleClass="waves-effect waves-light btn modal-action modal-close pink accent-2" >
-								<f:ajax event="action" render="form-table" onevent="$(this).ajustaTabela"/>
+								<f:ajax event="action" render=":form-table" onevent="$(this).ajustaTabela"/>
 							</h:commandLink>
 						</div>
 						
