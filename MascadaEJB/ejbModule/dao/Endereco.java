@@ -1,12 +1,15 @@
 package dao;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 
 @NamedQueries({
@@ -23,7 +26,9 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name="todosEnderecosPorNumero",
 			query="Select e from Endereco e where e.numero = :numero"),
 	@NamedQuery(name="todosEnderecosPorComplemento",
-			query="Select e from Endereco e where e.complemento = :complemento")	
+			query="Select e from Endereco e where e.complemento = :complemento"),	
+	@NamedQuery(name="enderecoPorClienteId",
+		query="Select e from Endereco e where e.cliente.oid = :oid")
 })
 
 @Entity
@@ -37,7 +42,9 @@ public class Endereco {
 	private String cep; 
 	private String numero;
 	private String complemento;
-
+	@OneToOne(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private Cliente cliente;
+	
 	public long getOid() {
 		return oid;
 	}
@@ -74,5 +81,12 @@ public class Endereco {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
 	
 }

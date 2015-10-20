@@ -21,7 +21,6 @@ import javax.persistence.OneToOne;
 		query="Select c from Cliente c where c.cpf = :cpf")
 })
 
-
 @Entity
 public class Cliente {
 	@Id

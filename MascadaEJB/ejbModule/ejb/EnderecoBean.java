@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import dao.Cliente;
 import dao.Endereco;
 import dao.Funcionario;
 
@@ -24,15 +25,12 @@ public class EnderecoBean implements EnderecoBeanLocal {
      * Default constructor. 
      */
     public EnderecoBean() {
-        // TODO Auto-generated constructor stub
-    	System.out.println("foi criado um endereco!!!");
     }
 
 	@Override
 	public List<Endereco> getTodosEnderecos() {
 		Query q = em.createNamedQuery("todosEnderecos");
 		List<Endereco> colResult = q.getResultList();
-		System.out.println("VOLTOUUUUUUUUUUUUUUUUUUUUU endereci " +colResult.size());
 		return colResult;
 	}
 
@@ -78,14 +76,25 @@ public class EnderecoBean implements EnderecoBeanLocal {
 
 	@Override
 	public void save(Endereco endereco) {
-		// TODO Auto-generated method stub
-		
+		if(em.find(Endereco.class, endereco.getOid()) == null){
+			em.persist(endereco);
+		}else{
+			em.merge(endereco);
+		}
 	}
 
 	@Override
 	public void delete(Endereco endereco) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Endereco getEnderecoPorCliente(long oid) {
+		Query q = em.createNamedQuery("enderecoPorClienteId")
+					.setParameter("oid", oid);
+		Endereco endereco = (Endereco) q.getSingleResult();
+		return endereco;
 	}
 
 
