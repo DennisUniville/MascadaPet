@@ -11,7 +11,6 @@ import javax.faces.event.ActionEvent;
 import dao.Cliente;
 import dao.Endereco;
 import ejb.ClienteBeanLocal;
-import ejb.EnderecoBeanLocal;
 
 @ManagedBean(name="crtCliente")
 @ViewScoped
@@ -25,7 +24,6 @@ public class CrtCliente implements Serializable {
 	public void inicializaCliente(ActionEvent event){
 		model= new Cliente();
 		model.setEndereco(new Endereco());
-		System.out.println("inicializaCliente");
 	}
 	
 	public void selecionarCliente(ActionEvent event) {
@@ -33,7 +31,6 @@ public class CrtCliente implements Serializable {
 	}
 	
 	public String save(){
-		System.out.println("save: name? " + model.getNome());
 		clienteBean.save(model);
 		return "";
 	}

@@ -11,7 +11,7 @@
 	<ui:define name="customCSS">
 		<style>
 			td:LAST-CHILD {
-				text-align: right;
+				text-align: right; 
 				margin: 0;
 			}
 			#tbody {
@@ -74,9 +74,13 @@
 		      </h:dataTable>
 		      
 		      <h:commandLink style="margin-top: 1.5em;" styleClass="btn pink accent-2 waves-effect waves-light left" 
-	      			actionListener="#{crtCliente.inicializaCliente}" >   			
+	      			actionListener="#{crtCliente.inicializaCliente}" value="Adicionar">   			
 	      			<f:ajax event="action" render=":formCliente" onevent="$(this).openModal2" />
-	      			<i class="mdi-social-person-add"></i>
+	      		</h:commandLink>
+      		
+	      		<h:commandLink style="margin-top: 1.5em; margin-left: 0.5em;" styleClass="btn pink accent-2 waves-effect waves-light left" 
+	      			actionListener="#{crtCliente.inicializaCliente}" value="Deletar">   			
+	      			<f:ajax event="action" render=":formCliente" onevent="$(this).openModal2" />
 	      		</h:commandLink>
 	      	</div>
          </h:form>                       			
@@ -147,13 +151,13 @@
 								<h:outputLabel id="lbl-cep" for="cep" value="CEP" ></h:outputLabel>
 							</div>
 						</div>
-		
-						<a  class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="" >Cancelar</a>							
+						
 						<h:commandButton value="Salvar" action="#{crtCliente.save}" type="submit"
 							styleClass="waves-effect waves-light btn modal-action modal-close pink accent-2" 
-							onclick="$(this).ajustaTabela"
-							>
-						</h:commandButton>
+							onclick="$(this).ajustaTabela" ></h:commandButton>
+						
+						<h:commandButton style="margin-left: 0.5em;" value="Cancelar" type="button"
+							styleClass="waves-effect waves-light btn modal-close pink accent-2" ></h:commandButton>
 					</h:form>
 				</div>			  
 			</div>
