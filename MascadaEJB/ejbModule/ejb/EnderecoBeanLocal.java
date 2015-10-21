@@ -17,7 +17,6 @@ public interface EnderecoBeanLocal {
 	public List<Endereco> getTodosFuncionariosPorCep(String cep);
 	public List<Endereco> getTodosFuncionariosPorNumero(String numero);
 	public List<Endereco> getTodosFuncionariosPorComplemento(String complemento);
-	public Endereco getEnderecoPorCliente(long oid);
 	
 	void save(Endereco endereco);
 	void delete(Endereco endereco);

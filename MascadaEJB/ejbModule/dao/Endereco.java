@@ -1,5 +1,7 @@
 package dao;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,12 +29,11 @@ import javax.persistence.OneToOne;
 			query="Select e from Endereco e where e.numero = :numero"),
 	@NamedQuery(name="todosEnderecosPorComplemento",
 			query="Select e from Endereco e where e.complemento = :complemento"),	
-	@NamedQuery(name="enderecoPorClienteId",
-		query="Select e from Endereco e where e.cliente.oid = :oid")
 })
 
 @Entity
-public class Endereco {
+public class Endereco implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long oid;
@@ -42,8 +43,6 @@ public class Endereco {
 	private String cep; 
 	private String numero;
 	private String complemento;
-	@OneToOne(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
-	private Cliente cliente;
 	
 	public long getOid() {
 		return oid;
@@ -75,17 +74,11 @@ public class Endereco {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	public String getComplemento() {
+	public String getComplemento() { 
 		return complemento;
 	}
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
-	}
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 	
 	

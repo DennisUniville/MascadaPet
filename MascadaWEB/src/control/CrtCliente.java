@@ -19,30 +19,23 @@ public class CrtCliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private ClienteBeanLocal clienteBean;
-	@EJB
-	private EnderecoBeanLocal enderecoBean;
-	
 	private Cliente model;
-	private Endereco enderecoModel;
-	
 	private transient HtmlDataTable dataTable;
 	
 	public void inicializaCliente(ActionEvent event){
 		model= new Cliente();
-		enderecoModel = new Endereco();
-		model.setEndereco(enderecoModel);
-		enderecoModel.setCliente(model);
+		model.setEndereco(new Endereco());
+		System.out.println("inicializaCliente");
 	}
 	
 	public void selecionarCliente(ActionEvent event) {
 		model = (Cliente) dataTable.getRowData();
-		enderecoModel = enderecoBean.getEnderecoPorCliente(model.getOid());
-		model.setEndereco(enderecoModel);
 	}
 	
-	public Object save(){
-		clienteBean.save(model);	
-		return null;
+	public String save(){
+		System.out.println("save: name? " + model.getNome());
+		clienteBean.save(model);
+		return "";
 	}
 	
 	public ClienteBeanLocal getClienteBean() {
@@ -72,21 +65,4 @@ public class CrtCliente implements Serializable {
 		this.dataTable = dataTable;
 	}
 
-	public EnderecoBeanLocal getEnderecoBean() {
-		return enderecoBean;
-	}
-
-	public void setEnderecoBean(EnderecoBeanLocal enderecoBeanLocal) {
-		this.enderecoBean = enderecoBeanLocal;
-	}
-
-	public Endereco getEnderecoModel() {
-		return enderecoModel;
-	}
-
-	public void setEnderecoModel(Endereco enderecoModel) {
-		this.enderecoModel = enderecoModel;
-	}
-
-	
 }

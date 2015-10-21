@@ -75,7 +75,7 @@
 		      
 		      <h:commandLink style="margin-top: 1.5em;" styleClass="btn pink accent-2 waves-effect waves-light left" 
 	      			actionListener="#{crtCliente.inicializaCliente}" >   			
-	      			<f:ajax event="action" render=":formCliente" onevent="$(this).openModal" />
+	      			<f:ajax event="action" render=":formCliente" onevent="$(this).openModal2" />
 	      			<i class="mdi-social-person-add"></i>
 	      		</h:commandLink>
 	      	</div>
@@ -148,15 +148,12 @@
 							</div>
 						</div>
 		
-						<div class="row">
-							<a  class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="" >Cancelar</a>							
-							<h:commandLink value="Salvar" action="#{crtCliente.save}"
-								styleClass="waves-effect waves-light btn modal-action modal-close pink accent-2" >
-								<f:ajax event="action" render=":form-table" onevent="$(this).ajustaTabela"/>
-							</h:commandLink>
-						</div>
-						
-						
+						<a  class="waves-effect waves-light btn modal-action modal-close pink accent-2" href="" >Cancelar</a>							
+						<h:commandButton value="Salvar" action="#{crtCliente.save}" type="submit"
+							styleClass="waves-effect waves-light btn modal-action modal-close pink accent-2" 
+							onclick="$(this).ajustaTabela"
+							>
+						</h:commandButton>
 					</h:form>
 				</div>			  
 			</div>
@@ -195,7 +192,7 @@
 				
 				}
 				
-				jQuery.fn.openModal = function(data) {
+				jQuery.fn.openModal2 = function(data) {
 					if (data.status == "success") {
 						$('#formCliente input').each(function() {						
 							var inputID = $(this).attr('id');
