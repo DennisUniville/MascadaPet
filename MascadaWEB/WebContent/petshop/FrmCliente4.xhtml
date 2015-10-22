@@ -1,0 +1,228 @@
+<ui:composition template="/petshop/template/index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"  >
+
+	<ui:define name="title">Cadastro de Cliente</ui:define>
+	
+	<ui:define name="customCSS">
+		<style>
+			td:LAST-CHILD {
+				text-align: right; 
+				margin: 0;
+			}
+			#tbody {
+			}			
+			#card-clientes {
+			    margin-top: 30px;
+			}		
+			#hearderForm {
+			}
+			#dlgClienteDetalhe .caption {
+	      		margin-bottom: 0;
+	      	}
+			.displayNone {
+				display: none;
+			}		
+		</style>
+	</ui:define>
+	
+	<ui:define name="breadcrumbs-title">Clientes</ui:define>
+	
+	<ui:define name="breadcrumb">
+	  <li><a href="">Inicio</a></li>
+      <li><a href="">Cadastros</a></li>
+      <li class="active">Cliente</li>                       
+	</ui:define>
+	
+	<ui:define name="content">
+		
+		<p class="caption">Relação de Clientes cadastrados</p>		
+		<div class="divider"></div>
+         
+         <h:form id="form-table" >
+         	<div id="card-clientes" class="card-panel" onload="Materialize.fadeInImage('#cliente-table')">	      
+		      <h:dataTable id="cliente-table" styleClass="bordered striped hoverable responsive-table"
+		      		value="#{crtCliente.clienteBean.getTodosClientes()}" var="cliente"  binding="#{crtCliente.dataTable}"
+		      		>
+		      	<h:column>
+		      		<f:facet name="header">CPF</f:facet>
+		      		#{cliente.cpf}
+		      	</h:column>
+		      	
+		      	<h:column>
+		      		<f:facet name="header">Nome</f:facet>
+		      		#{cliente.nome}
+		      	</h:column>
+		      	
+		      	<h:column>
+		      		<f:facet name="header">Telefone</f:facet>
+		      		#{cliente.telefone}
+		      	</h:column>
+		      	
+		      	<h:column>
+		      		<h:commandLink styleClass="btn-floating btn-flat waves-effect waves-light pink accent-2" 
+		      			actionListener="#{crtCliente.selecionarCliente}">
+		      			<f:ajax event="action" render="@form" onevent="$(this).atualizaModal"/>
+		      			<i class="mdi-editor-border-color"></i>
+		      		</h:commandLink>
+		      	</h:column>
+	
+		      </h:dataTable>
+		      
+		      <h:commandLink style="margin-top: 1.5em;" styleClass="btn pink accent-2 waves-effect waves-light left" 
+	      			actionListener="#{crtCliente.inicializaCliente}" value="Adicionar">   			
+	      			<f:ajax event="action" onevent="$(this).openModal2" />
+	      		</h:commandLink>
+      		
+	      		<h:commandLink style="margin-top: 1.5em; margin-left: 0.5em;" styleClass="btn pink accent-2 waves-effect waves-light left" 
+	      			actionListener="#{crtCliente.inicializaCliente}" value="Deletar">   			
+	      			<f:ajax event="action" render="@form" onevent="$(this).openModal2" />
+	      		</h:commandLink>
+	      	</div>
+                            			
+      	
+		<div id="dlgClienteDetalhe" class="modal" style="display: none; opacity: 1; top: 0px;">
+			<div class="modal-content">
+				<div class="row">
+					<!-- <h:form id="formCliente" styleClass="col s12" > -->
+						<p class="caption">Dados do Cliente:</p>	
+		
+						<div class="row">
+							<div class="input-field col s2">				
+								<h:inputText id="codigo" disabled="true" styleClass="validate" value="#{crtCliente.model.oid}" ></h:inputText>
+								<h:outputLabel id="lbl-codigo" for="codigo" value="Codigo"></h:outputLabel>
+							</div>
+		
+							<div class="input-field col s7">
+								<h:inputText id="nome" styleClass="validate" value="#{crtCliente.model.nome}" ></h:inputText>
+								<h:outputLabel id="lbl-nome" for="nome" value="Nome"></h:outputLabel>
+							</div>
+		
+							<div class="input-field col s3">
+								<h:inputText id="cpf" styleClass="validate" value="#{crtCliente.model.cpf}" ></h:inputText>
+								<h:outputLabel id="lbl-cpf" for="cpf" value="CPF"></h:outputLabel>
+							</div>
+						</div>
+		
+						<div class="row">
+							<div class="input-field col s6">
+								<h:inputText id="telefone" styleClass="validate" value="#{crtCliente.model.telefone}" ></h:inputText>
+								<h:outputLabel id="lbl-telefone" for="telefone" value="Telefone"></h:outputLabel>
+							</div>
+		
+							<div class="input-field col s6">
+								<h:inputText id="email" styleClass="validate" p:type="email" value="#{crtCliente.model.email}" ></h:inputText>
+								<h:outputLabel id="lbl-email" for="email" value="Email"></h:outputLabel>
+							</div>
+						</div>
+		
+						<p class="caption">Endereco:</p>	
+		
+						<div class="row">
+							<div class="input-field col s8">
+								<h:inputText id="rua" styleClass="validate" value="#{crtCliente.model.endereco.rua}" label="lbl-rua" ></h:inputText>
+								<h:outputLabel id="lbl-rua" for="rua" value="Rua"></h:outputLabel>
+							</div>
+		
+							<div class="input-field col s4">
+								<h:inputText id="numero" styleClass="validate" value="#{crtCliente.model.endereco.numero}" label="lbl-numero" ></h:inputText>
+								<h:outputLabel id="lbl-numero" for="numero" value="Numero"></h:outputLabel>
+							</div>
+						</div>
+		
+		
+						<div class="row">
+							<div class="input-field col s4">
+								<h:inputText id="complemento" styleClass="validate" value="#{crtCliente.model.endereco.complemento}" label="lbl-complemento" ></h:inputText>
+								<h:outputLabel id="lbl-complemento" for="complemento" value="Complemento"></h:outputLabel>
+							</div>
+		
+							<div class="input-field col s6"> 
+								<h:inputText id="bairro" styleClass="validate" value="#{crtCliente.model.endereco.bairro}" label="lbl-bairro" ></h:inputText>
+								<h:outputLabel id="lbl-bairro" for="bairro" value="Bairro"></h:outputLabel>
+							</div>
+		
+							<div class="input-field col s2">
+								<h:inputText id="cep" styleClass="validate" value="#{crtCliente.model.endereco.cep}" label="lbl-cep" ></h:inputText>
+								<h:outputLabel id="lbl-cep" for="cep" value="CEP" ></h:outputLabel>
+							</div>
+						</div>
+						
+						<h:commandButton value="Salvar" action="#{crtCliente.save}" type="submit"
+							styleClass="waves-effect waves-light btn modal-action modal-close pink accent-2" 
+							  ><f:ajax event="action" execute="@form" render="@form" onevent="$(this).ajustaTabela"/></h:commandButton>
+						
+						<h:commandButton style="margin-left: 0.5em;" value="Cancelar" type="button"
+							styleClass="waves-effect waves-light btn modal-close pink accent-2" ></h:commandButton>
+					<!-- </h:form> -->
+				</div>			  
+			</div>
+		</div>
+	  
+	 </h:form> 
+	</ui:define>
+	
+	<ui:define name="customScripts">
+		<h:outputScript>
+			$(document).ready(function() {
+				jQuery.fn.ajustaTabela = function(data) {
+					if (data.status == "success" || data.status == "ready") {
+						$("#form-table\\:cliente-table tr td:LAST-CHILD").css({
+							'width' : '1px', 
+							'padding' : '0'
+						})
+						.addClass('btn-line');
+					}
+				}
+				
+				jQuery.fn.atualizaModal = function(data) {
+					if (data.status == "success") {
+						$('#dlgClienteDetalhe input').each(function() {						
+							var inputID = $(this).attr('id');
+							
+							if(typeof inputID !== 'undefined') {
+								var hasValue = ($.trim($(this).val()).length > 0);
+								var labelID = '#' + inputID.replace(':', '\\:lbl-');			
+								$(this).toggleClassCustom(labelID, 'active', hasValue);					
+							}
+						}); 
+						
+						$('#dlgClienteDetalhe').openModal();
+					}
+				
+				}
+				
+				jQuery.fn.openModal2 = function(data) {
+					if (data.status == "success") {
+						$('#dlgClienteDetalhe input').each(function() {						
+							var inputID = $(this).attr('id');
+							
+							if(typeof inputID !== 'undefined') {
+								$(this).val('');	
+								var labelID = '#' + inputID.replace(':', '\\:lbl-');		
+								$(this).toggleClassCustom(labelID, 'active', false);					
+							}
+						}); 
+						
+						$('#dlgClienteDetalhe').openModal();
+					}
+				}
+				
+				jQuery.fn.toggleClassCustom = function(_selector, _class, _bool) {
+					if(_bool) {		
+						$(_selector).removeClass(_class); 
+						$(_selector).addClass(_class); 
+					} else {
+						$(_selector).removeClass(_class);  
+					}
+				}
+				
+				$(this).ajustaTabela({"status" : "ready"});
+			});	
+		</h:outputScript>
+	</ui:define>
+</ui:composition>
