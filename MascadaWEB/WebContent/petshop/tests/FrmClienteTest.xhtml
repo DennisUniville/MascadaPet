@@ -1,0 +1,82 @@
+<ui:composition template="/petshop/template/index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough" 
+	xmlns:jsf="http://xmlns.jcp.org/jsf"  >
+
+	<ui:define name="title">Cadastro de Cliente</ui:define>
+	
+	<ui:define name="customCSS">
+		<style>
+			td:LAST-CHILD {
+				text-align: right; 
+				margin: 0;
+			}
+			#tbody {
+			}			
+			#card-clientes {
+			    margin-top: 30px;
+			}		
+			#hearderForm {
+			}
+			#dlgClienteDetalhe .caption {
+	      		margin-bottom: 0;
+	      	}
+			.displayNone {
+				display: none;
+			}		
+		</style>
+	</ui:define>
+	
+	<ui:define name="breadcrumbs-title">Clientes</ui:define>
+	
+	<ui:define name="breadcrumb">
+	  <li><a href="">Inicio</a></li>
+      <li><a href="">Cadastros</a></li>
+      <li class="active">Cliente</li>                       
+	</ui:define>
+	
+	<ui:define name="content">
+		
+		<p class="caption">Relação de Clientes cadastrados</p>		
+		<div class="divider"></div>
+         
+         <form jsf:id="form" jsf:prependId="false">
+         	<div id="card-clientes" class="card-panel" onload="Materialize.fadeInImage('#dataTable')">	
+         		<h:dataTable id="dataTable" styleClass="bordered striped hoverable" 
+         			value="#{crtCliente.clienteBean.getTodosClientes()}" var="cliente"  binding="#{crtCliente.dataTable}" >
+         			       		
+         		</h:dataTable>
+         		
+         		<h:column>
+		      		<f:facet name="header">CPF</f:facet>
+		      		#{cliente.cpf}
+		      	</h:column>
+		      	
+		      	<h:column>
+		      		<f:facet name="header">Nome</f:facet>
+		      		#{cliente.nome}
+		      	</h:column>
+		      	
+		      	<h:column>
+		      		<f:facet name="header">Telefone</f:facet>
+		      		#{cliente.telefone}
+		      	</h:column>
+		      	
+	            <button jsf:action="#{crtCliente.save}"  
+	            	class="waves-effect waves-light btn modal-action modal-close pink accent-2">Envia</button>
+         	</div>
+        
+        </form>
+
+	</ui:define> 
+	
+	<ui:define name="customScripts">
+		<h:outputScript>
+
+		</h:outputScript>
+	</ui:define>
+</ui:composition>
