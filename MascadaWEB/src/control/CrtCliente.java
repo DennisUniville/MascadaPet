@@ -28,10 +28,18 @@ public class CrtCliente implements Serializable {
 	
 	public void selecionarCliente(ActionEvent event) {
 		model = (Cliente) dataTable.getRowData();
+		System.out.println("CPF:" + model.getCpf());
 	}
 	
 	public String save(){
+		Endereco endereco = model.getEndereco();
+		endereco.setCliente(model);
 		clienteBean.save(model);
+		return "";
+	}
+	
+	public String delete(){
+		clienteBean.delete(model);
 		return "";
 	}
 	

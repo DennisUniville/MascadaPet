@@ -13,6 +13,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
+import org.eclipse.persistence.annotations.CascadeOnDelete;
+
 
 @NamedQueries({
 	@NamedQuery(name="todosClientes",
@@ -43,7 +45,7 @@ public class Cliente implements Serializable {
 	@Column(length=500)
 	private String email;
 	
-	@OneToOne(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.EAGER)
 	private Endereco endereco;
 	
 	public String getTelefone() {
@@ -52,8 +54,8 @@ public class Cliente implements Serializable {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public Endereco getEndereco() {
-		return endereco;
+	public Endereco getEndereco() { 
+		return endereco; 
 	}
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;

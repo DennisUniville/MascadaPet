@@ -5,13 +5,14 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 
 @NamedQueries({
@@ -43,6 +44,9 @@ public class Endereco implements Serializable {
 	private String cep; 
 	private String numero;
 	private String complemento;
+	@OneToOne(mappedBy="endereco", cascade=CascadeType.PERSIST)
+	@CascadeOnDelete
+	private Cliente cliente;
 	
 	public long getOid() {
 		return oid;
@@ -79,6 +83,12 @@ public class Endereco implements Serializable {
 	}
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	

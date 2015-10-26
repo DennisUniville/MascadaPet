@@ -1,0 +1,32 @@
+html {
+  position: relative;
+  min-height: 100%;
+  height: auto;
+}
+body {
+  margin-bottom: 60px;
+  padding-bottom: 20px;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+}
+ footer container {
+   margin: 20px 0;
+ }
+.main-content {
+	position: inherit;
+	width: 80%;
+}
+@media only screen and (min-width : 986px) {
+	.main-content {
+		margin: 25px auto 0 300px;
+	}
+}
+@media only screen and (max-width : 985px) {
+	.main-content {
+		margin: 25px auto 0 auto;
+	}
+}
