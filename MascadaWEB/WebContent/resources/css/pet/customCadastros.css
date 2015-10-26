@@ -1,0 +1,20 @@
+td:LAST-CHILD {
+	text-align: right; 
+	margin: 0;
+}
+#cardTable {
+	padding-top: 30px;
+	padding-bottom: 80px;
+}				
+#dlgDetalhe .caption {
+	margin-bottom: 0;
+}
+#formTable {
+	margin-top: 35px;
+}  
+.displayNone {
+	display: none;
+}
+.spanClicavel {
+	cursor: pointer;
+}
