@@ -16,23 +16,15 @@ import dao.Raca;
 public class RacaBean implements RacaBeanLocal {
 	@PersistenceContext(name="mascadacontext")
 	private EntityManager em;
-    /**
-     * Default constructor. 
-     */
+
     public RacaBean() {
-        // TODO Auto-generated constructor stub
-    	System.out.println("fui criado!!!");
     }
 
 	@Override
 	public List<Raca> getTodasRacas() {
 		Query q = em.createNamedQuery("todasRacas");
-		
 		List<Raca> colResult = q.getResultList();
-		System.out.println("VOLTOUUUUUUUUUUUUUUUUUUUUU  " +colResult.size());
 		return colResult;
-
-	
 	}
 
 	@Override
@@ -49,8 +41,7 @@ public class RacaBean implements RacaBeanLocal {
 	
 	@Override
 	public void save(Raca raca){
-		if(em.find(Raca.class, raca.getOid())
-				==null){
+		if(em.find(Raca.class, raca.getOid()) == null){
 			//insert
 					em.persist(raca);
 		}else{
