@@ -7,43 +7,55 @@
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"  >
 
-	<ui:define name="title">Cadastro de Raça</ui:define>
+	<ui:define name="title">Cadastro de Funcionário</ui:define>
+	
+	<!-- http://localhost:8080/MascadaWEB/petshop/FrmFuncionario.xhtml -->
 	
 	<ui:define name="customCSS">
 		 <h:outputStylesheet library="css" name="pet/customCadastros.css"/>
 	</ui:define>
 	
-	<ui:define name="breadcrumbs-title">Raças</ui:define>
+	<ui:define name="breadcrumbs-title">Funcionários</ui:define>
 	
 	<ui:define name="breadcrumb">
-		<li><a href="">Início</a></li>
+		<li><a href="">Inicio</a></li>
 		<li><a href="">Cadastros</a></li>
-		<li class="active">Raça</li>                       
+		<li class="active">Funcionários</li>                       
 	</ui:define>
 	
 	<ui:define name="content">
 		
-		<p class="caption">Relação de Raças cadastrados</p>		
+		<p class="caption">Relação de Funcionários cadastrados</p>		
 		<div class="divider"></div>
          
          <h:form id="formTable" >
          	<div id="cardTable" class="card-panel" onload="Materialize.fadeInImage('#dataTableID')">	      
 		      <h:dataTable id="dataTableID" styleClass="bordered striped hoverable responsive-table"
-		      		value="#{crtRaca.racaBean.getTodasRacas()}" var="raca"  binding="#{crtRaca.dataTable}"
+		      		value="#{crtFuncionario.funcionarioBean.getTodosFuncionarios()}" var="funcionario"  binding="#{crtFuncionario.dataTable}"
 		      		>
 		      	<h:column>
-		      		<f:facet name="header">Código</f:facet>
-		      		#{raca.oid}
+		      		<f:facet name="header">OID</f:facet>
+		      		#{funcionario.oid}
 		      	</h:column>
 		      	
 		      	<h:column>
-		      		<f:facet name="header">Descrição</f:facet>
-		      		#{raca.descricao}
+		      		<f:facet name="header">Login</f:facet>
+		      		#{funcionario.login}
 		      	</h:column>
-	
+		      	
+		      	<h:column>
+		      		<f:facet name="header">Nome</f:facet>
+		      		#{funcionario.nome}
+		      	</h:column>
+		      	
+		      	<h:column>
+		      		<f:facet name="header">RG</f:facet>
+		      		#{funcionario.rg}
+		      	</h:column>
+		      	
 		      	<h:column>
 		      		<h:commandLink styleClass="btn-floating btn-flat waves-effect waves-light pink accent-2" 
-		      			actionListener="#{crtRaca.selecionarRaca}" >
+		      			actionListener="#{crtFuncionario.selecionarFuncionario}" >
 		      			<f:ajax event="action" render="@form" onevent="$(this).atualizaModal"/>
 		      			<i class="mdi-editor-border-color"></i>
 		      		</h:commandLink>
@@ -52,7 +64,7 @@
 		      </h:dataTable>
 		      
 		      <h:commandLink style="margin-top: 1.5em;" styleClass="btn pink accent-2 waves-effect waves-light left" 
-	      			actionListener="#{crtRaca.inicializaRaca}" value="Adicionar">   			
+	      			actionListener="#{crtFuncionario.inicializaFuncionario}" value="Adicionar">   			
 	      			<f:ajax event="action" render="@form" onevent="$(this).openModal2" />
 	      		</h:commandLink>
 	      	</div>
@@ -64,35 +76,57 @@
 					
 					<div class="row">
 						<div class="col s12" >
-							<p class="caption">Dados da Raça:</p>	
+							<p class="caption">Dados do Funcionário:</p>	
 			
 							<div class="row">
 								<div class="input-field col s2">				
-									<h:inputText id="codigo" disabled="true" styleClass="validate" value="#{crtRaca.model.oid}" ></h:inputText>
+									<h:inputText id="codigo" disabled="true" styleClass="validate" value="#{crtFuncionario.model.oid}" ></h:inputText>
 									<h:outputLabel id="lbl-codigo" for="codigo" value="Codigo"></h:outputLabel>
 								</div>
 			
 								<div class="input-field col s7">
-									<h:inputText id="descricao" styleClass="validate" value="#{crtRaca.model.descricao}" ></h:inputText>
-									<h:outputLabel id="lbl-descricao" for="descricao" value="Descricao"></h:outputLabel>
+									<h:inputText id="login" styleClass="validate" value="#{crtFuncionario.model.login}" ></h:inputText>
+									<h:outputLabel id="lbl-login" for="login" value="Login"></h:outputLabel>
+								</div>
+			
+								<div class="input-field col s3">
+									<h:inputText id="senha" styleClass="validate" value="#{crtFuncionario.model.senha}" ></h:inputText>
+									<h:outputLabel id="lbl-senha" for="senha" value="Senha"></h:outputLabel>
 								</div>
 							</div>
-						</div>		
-					</div>
+			
+							<div class="row">
+								<div class="input-field col s6">
+									<h:inputText id="nome" styleClass="validate" value="#{crtFuncionario.model.nome}" ></h:inputText>
+									<h:outputLabel id="lbl-nome" for="nome" value="Nome"></h:outputLabel>
+								</div>
+								<div class="input-field col s3">
+									<h:inputText id="rg" styleClass="validate" value="#{crtFuncionario.model.rg}" ></h:inputText>
+									<h:outputLabel id="lbl-rg" for="rg" value="RG"></h:outputLabel>
+								</div>
+			
+								
+							</div>
+			
+			
+					</div>		
 					
-					<button jsf:action="#{crtRaca.save}" type="submit" 
+					<button jsf:action="#{crtFuncionario.save}" type="submit" 
 						class="waves-effect waves-light btn modal-action modal-close pink accent-2" >
 						<f:ajax event="action" execute="@form" render="@form" onevent="$(this).ajustaTabela"/>Salvar</button>	
 					
-					<button jsf:rendered="#{crtRaca.model.oid gt 0}" jsf:action="#{crtRaca.delete}" type="submit" style="margin-left: 0.5em;"
+					<button jsf:rendered="#{crtFuncionario.model.oid gt 0}" jsf:action="#{crtFuncionario.delete}" type="submit" style="margin-left: 0.5em;"
 						class="waves-effect waves-light btn pink accent-2 modal-action modal-close" >
 						<f:ajax event="action" execute="@form" render="@form" onevent="$(this).ajustaTabela"/>Excluir</button>
 					
-					<h:commandLink rendered="#{crtRaca.model.oid eq 0}" style="margin-left: 0.5em;"
-						class="waves-effect waves-light btn pink accent-2"  actionListener="#{crtRaca.inicializaRaca}" >
+					<h:commandLink rendered="#{crtFuncionario.model.oid eq 0}" style="margin-left: 0.5em;"
+						class="waves-effect waves-light btn pink accent-2"  actionListener="#{crtFuncionario.inicializaFuncionario}" >
 						<f:ajax event="click" onevent="$(this).zeraModal"/>Limpar</h:commandLink>
-				</div>	  	
-			</div>
+						
+				</div>
+			</div>	 
+			
+			</div> 	
 	 </h:form> 
 	</ui:define>
 	

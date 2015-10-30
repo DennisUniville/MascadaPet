@@ -58,4 +58,6 @@ public class RacaBean implements RacaBeanLocal {
 		}
 	}
 
+
+
 }

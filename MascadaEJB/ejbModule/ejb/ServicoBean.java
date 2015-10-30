@@ -1,12 +1,15 @@
 package ejb;
 
 import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import dao.Raca;
+
+
+import dao.Servico;
 
 /**
  * Session Bean implementation class RacaBean
@@ -25,10 +28,10 @@ public class ServicoBean implements ServicoBeanLocal {
     }
 
 	@Override
-	public List<Raca> getTodasRacas() {
-		Query q = em.createNamedQuery("todasRacas");
+	public List<Servico> getTodosServicos() {
+		Query q = em.createNamedQuery("todosServicos");
 		
-		List<Raca> colResult = q.getResultList();
+		List<Servico> colResult = q.getResultList();
 		System.out.println("VOLTOUUUUUUUUUUUUUUUUUUUUU  " +colResult.size());
 		return colResult;
 
@@ -36,35 +39,37 @@ public class ServicoBean implements ServicoBeanLocal {
 	}
 
 	@Override
-	public List<Raca> getTodasRacasPorId(long oid) {
+	public List<Servico> getTodosServicosPorId(long oid) {
 		System.out.println("Pelo menos passou aqui...");
 		return null;
 	}
 
 	@Override
-	public List<Raca> getTodasRacasPorDescricao(String descricao) {
+	public List<Servico> getTodosServicosPorDescricao(String descricao) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	@Override
-	public void save(Raca raca){
-		if(em.find(Raca.class, raca.getOid())
+	public void save(Servico servico){
+		if(em.find(Servico.class, servico.getOid())
 				==null){
 			//insert
-					em.persist(raca);
+					em.persist(servico);
 		}else{
 			//update
-			em.merge(raca);
+			em.merge(servico);
 		}
 	}
 	
 	@Override
-	public void delete(Raca raca){
-		raca = em.find(Raca.class, raca.getOid());
-		if(raca != null){
-			em.remove(raca);
+	public void delete(Servico servico){
+		servico = em.find(Servico.class, servico.getOid());
+		if(servico != null){
+			em.remove(servico);
 		}
 	}
+
+
 
 }

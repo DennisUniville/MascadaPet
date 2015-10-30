@@ -5,15 +5,16 @@ import java.util.List;
 import javax.ejb.Local;
 
 import dao.Raca;
+import dao.Servico;
 
 @Local
 public interface ServicoBeanLocal {
 
-	public List<Raca> getTodasRacas();
-	public List<Raca> getTodasRacasPorId(long oid);
-	public List<Raca> getTodasRacasPorDescricao(String descricao);
+	public List<Servico> getTodosServicos();
+	public List<Servico> getTodosServicosPorId(long oid);
+	public List<Servico> getTodosServicosPorDescricao(String descricao);
 	
-	public void save(Raca raca);
-	void delete(Raca raca);
+	public void save(Servico servico);
+	void delete(Servico servico);
 	
 }
