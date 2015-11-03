@@ -59,6 +59,38 @@ $(document).ready(function() {
 		}
 	}
 	
+	jQuery.fn.deletaObjeto = function(data) {
+		if (data.status == "success") {
+			$('#dlgDeleta input').each(function() {						
+				var inputID = $(this).attr('id');
+				
+				if(typeof inputID !== 'undefined') {
+					$(this).val('');	
+					var labelID = '#' + inputID.replace(':', '\\:lbl-');		
+					$(this).toggleClassCustom(labelID, 'active', false);					
+				}
+			}); 
+			
+			$('#dlgDeleta').openModal();
+			$(this).ajustaTabela(data);
+		}
+	}
+	
+	jQuery.fn.zeraModal2 = function(data) {
+		if (data.status == "success") {
+			$('#dlgDeleta input').each(function() {						
+				var inputID = $(this).attr('id');
+				
+				if(typeof inputID !== 'undefined') {
+					$(this).val('');
+					var labelID = '#' + inputID.replace(':', '\\:lbl-');			
+					$(this).toggleClassCustom(labelID, 'active', false);					
+				}
+			}); 
+			$(this).ajustaTabela(data);
+		}
+	}
+	
 	jQuery.fn.toggleClassCustom = function(_selector, _class, _bool) {
 		if(_bool) {		
 			$(_selector).removeClass(_class); 

@@ -1,4 +1,4 @@
-td:LAST-CHILD {
+td:LAST-CHILD, td:nth-last-child(2) {
 	text-align: right; 
 	margin: 0;
 }
