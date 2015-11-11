@@ -48,6 +48,13 @@
 		      			<i class="mdi-editor-border-color"></i>
 		      		</h:commandLink>
 		      	</h:column>
+		      	<h:column>
+		      		<h:commandLink styleClass="btn-floating btn-flat waves-effect waves-light pink accent-2" 
+		      			actionListener="#{crtRaca.selecionarRaca}" >
+		      			<f:ajax event="action" render="@form" onevent="$(this).deletaObjeto"/>
+		      			<i class="mdi-action-delete"></i>
+		      		</h:commandLink>
+		      	</h:column>
 	
 		      </h:dataTable>
 		      
@@ -72,10 +79,18 @@
 									<h:outputLabel id="lbl-codigo" for="codigo" value="Codigo"></h:outputLabel>
 								</div>
 			
-								<div class="input-field col s7">
+								<div class="input-field col s6">
 									<h:inputText id="descricao" styleClass="validate" value="#{crtRaca.model.descricao}" ></h:inputText>
 									<h:outputLabel id="lbl-descricao" for="descricao" value="Descricao"></h:outputLabel>
 								</div>
+								
+								<div class="input-field col s4">
+									<!-- <h:selectOneMenu value="#{crtEspecie.model}">
+							   			<f:selectItems value="#{crtEspecie.racas}" var="r"
+							   			itemLabel="#{r.descricao}" itemValue="#{r.oid}" />
+							   		</h:selectOneMenu> -->
+								</div>
+								
 							</div>
 						</div>		
 					</div>
@@ -93,6 +108,37 @@
 						<f:ajax event="click" onevent="$(this).zeraModal"/>Limpar</h:commandLink>
 				</div>	  	
 			</div>
+				<div id="dlgDeleta" class="modal" style="display: none; opacity: 1; top: 0px;">
+				<div class="modal-content">
+					
+					<div onclick="$('#dlgDeleta').closeModal()" ><span class="spanClicavel"><i class="mdi-navigation-close right"></i></span></div>
+					
+					<div class="row">
+						<div class="col s12" >
+							<p class="caption">Deseja Deletar a Raça?</p>
+							<div class="row">
+								<div class="input-field col s2">				
+									<h:inputText id="codigo1" disabled="true" styleClass="validate" value="#{crtRaca.model.oid}" ></h:inputText>
+									<h:outputLabel id="lbl-codigo1" for="codigo" value="Codigo"></h:outputLabel>
+								</div>
+			
+								<div class="input-field col s7">
+									<h:inputText id="nome1" disabled="true" styleClass="validate" value="#{crtRaca.model.descricao}" ></h:inputText>
+									<h:outputLabel id="lbl-nome1" for="nome" value="Nome"></h:outputLabel>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<button jsf:action="#{crtRaca.delete}" type="submit" style="margin-left: 0.5em;"
+						class="waves-effect waves-light btn pink accent-2 modal-action modal-close" >
+						<f:ajax event="action" execute="@form" render="@form" onevent="$(this).ajustaTabela"/>Excluir</button>
+					
+					<h:commandLink style="margin-left: 0.5em;"
+						class="waves-effect waves-light btn pink accent-2"  actionListener="#{crtRaca.inicializaRaca}" >
+						<f:ajax event="click" onevent="$(this).zeraModal"/>Cancela</h:commandLink>
+				</div>
+			</div> 
 	 </h:form> 
 	</ui:define>
 	

@@ -51,9 +51,6 @@ public class CrtCliente implements Serializable {
 		this.model = model;
 	}
 
-	public ClienteBeanLocal getRacaBean() {
-		return clienteBean;
-	}
 
 	public void setClienteBean(ClienteBeanLocal clienteBean) {
 		this.clienteBean = clienteBean;

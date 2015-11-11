@@ -6,7 +6,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
+@NamedQueries({
+	@NamedQuery(name="todasEspecies",
+			query="Select e from Especie e"),
+	@NamedQuery(name="todasEspeciesPorId",
+			query="Select e from Especie e where e.oid = :oid"),
+	@NamedQuery(name="todasEspeciesPorDescricao",
+			query="Select e from Especie e where e.descricao like :descricao")
+})
 
 @Entity
 public class Especie {
@@ -14,18 +24,10 @@ public class Especie {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long oid;
 	
-	private String Descricao;
+	private String descricao;
 	@ManyToOne(cascade={CascadeType.MERGE})
 	private Raca raca; // tem uma raça
 	
-	
-	
-	public Raca getRaca() {
-		return raca;
-	}
-	public void setRaca(Raca raca) {
-		this.raca = raca;
-	}
 	public long getOid() {
 		return oid;
 	}
@@ -33,10 +35,18 @@ public class Especie {
 		this.oid = oid;
 	}
 	public String getDescricao() {
-		return Descricao;
+		return descricao;
 	}
 	public void setDescricao(String descricao) {
-		Descricao = descricao;
+		this.descricao = descricao;
 	}
+	public Raca getRaca() {
+		return raca;
+	}
+	public void setRaca(Raca raca) {
+		this.raca = raca;
+	}
+	
+	
 	
 }
