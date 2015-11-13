@@ -23,10 +23,7 @@ public class Especie {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long oid;
-	
 	private String descricao;
-	@ManyToOne(cascade={CascadeType.MERGE})
-	private Raca raca; // tem uma raça
 	
 	public long getOid() {
 		return oid;
@@ -40,13 +37,5 @@ public class Especie {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Raca getRaca() {
-		return raca;
-	}
-	public void setRaca(Raca raca) {
-		this.raca = raca;
-	}
-	
-	
-	
+		
 }

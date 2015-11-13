@@ -27,7 +27,6 @@ public class CrtEspecie implements Serializable {
 	
 	public void inicializaEspecie(ActionEvent event){
 		model= new Especie();
-		
 	}
 	
 	public void selecionarEspecie(ActionEvent event) {

@@ -8,11 +8,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.event.ActionEvent;
 
-import dao.Cliente;
-import dao.Endereco;
 import dao.Raca;
-import ejb.ClienteBeanLocal;
-import ejb.RacaBean;
 import ejb.RacaBeanLocal;
 
 @ManagedBean(name="crtRaca")
@@ -28,9 +24,9 @@ public class CrtRaca implements Serializable{
 	public void createNewRaca(){
 		model= new Raca();
 	}
-	public void inicializaRaca(ActionEvent event){
-		model= new Raca();
 	
+	public void inicializaRaca(ActionEvent event){
+		model= new Raca();	
 	}
 	
 	public void selecionarRaca(ActionEvent event) {

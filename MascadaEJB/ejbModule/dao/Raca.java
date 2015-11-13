@@ -2,10 +2,12 @@ package dao;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -20,25 +22,36 @@ import javax.persistence.NamedQuery;
 
 @Entity
 public class Raca implements Serializable{
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long oid;
 	private String descricao;
+	@ManyToOne(cascade={CascadeType.MERGE})
+	private Especie especie;
 
 	public long getOid() {
 		return oid;
 	}
+
 	public void setOid(long oid) {
 		this.oid = oid;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
+	public Especie getEspecie() {
+		return especie;
+	}
+
+	public void setEspecie(Especie especie) {
+		this.especie = especie;
+	}
 
 }
