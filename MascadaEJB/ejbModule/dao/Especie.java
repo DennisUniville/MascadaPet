@@ -1,11 +1,9 @@
 package dao;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -37,5 +35,31 @@ public class Especie {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-		
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = (int) (prime * result + oid);
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if ( this == obj )
+			return true;
+		if ( obj == null )
+			return false;
+		if ( getClass() != obj.getClass())
+			return false;
+		Especie other = (Especie) obj;
+		if(oid != other.oid)
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return String.valueOf(oid); 
+	}
+	
 }

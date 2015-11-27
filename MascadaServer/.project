@@ -4,9 +4,9 @@
 	<comment></comment>
 	<projects>
 		<project>MascadaEJB</project>
-		<project>MascadaREST</project>
 		<project>MascadaWEB</project>
 		<project>RemoteSystemsTempFiles</project>
+		<project>MascadaWEBResource</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

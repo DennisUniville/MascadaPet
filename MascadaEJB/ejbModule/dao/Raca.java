@@ -21,12 +21,14 @@ import javax.persistence.NamedQuery;
 })
 
 @Entity
-public class Raca implements Serializable{
+public class Raca implements Serializable {
 	private static final long serialVersionUID = 1L;	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long oid;
+	
 	private String descricao;
+	
 	@ManyToOne(cascade={CascadeType.MERGE})
 	private Especie especie;
 

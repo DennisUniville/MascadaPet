@@ -3,6 +3,7 @@
 	<name>MascadaREST</name>
 	<comment></comment>
 	<projects>
+		<project>MascadaEJB</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

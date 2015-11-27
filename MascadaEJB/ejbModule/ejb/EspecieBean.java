@@ -34,8 +34,14 @@ public class EspecieBean implements EspecieBeanLocal {
 
 	@Override
 	public List<Especie> getTodasEspeciesPorId(long oid) {
-		// TODO Auto-generated method stub
+
 		return null;
+	}
+
+
+	@Override
+	public Especie getEspeciePorOid(long oid) {
+		return em.find(Especie.class, oid);
 	}
 
 	@Override
