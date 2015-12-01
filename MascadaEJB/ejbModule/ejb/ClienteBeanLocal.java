@@ -6,6 +6,7 @@ import javax.ejb.Local;
 import javax.persistence.NoResultException;
 
 import dao.Cliente;
+import ejb.exception.ValidationException;
 
 @Local
 public interface ClienteBeanLocal {
@@ -22,7 +23,7 @@ public interface ClienteBeanLocal {
 	
 	public List<Cliente> getTodosClientesPorEmail(String email);	
 	
-	public void save(Cliente cliente);
+	public void save(Cliente cliente) throws ValidationException;
 	
 	public void delete(Cliente cliente);
 	

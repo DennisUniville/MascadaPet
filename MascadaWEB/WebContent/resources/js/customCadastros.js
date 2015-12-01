@@ -76,15 +76,16 @@ $(document).ready(function() {
 			$('#dlgDetalhe input').each(function() {						
 				var inputID = $(this).attr('id');
 				
+				$(this).removeClass("valid");
+				$(this).removeClass("invalid");
+				
 				if(typeof inputID !== 'undefined') {
 					$(this).val('');	
 					var labelID = '#' + inputID.replace(':', '\\:lbl-');		
 					$(this).toggleClassCustom(labelID, 'active', false);					
 				}
 			}); 
-			
-			
-			
+
 			$('#formTable\\:selectID').material_select();
 			$('.dropdown').prepend("<option value=\"\" disabled selected>Escolha a opcao</option>");
 			
@@ -105,9 +106,8 @@ $(document).ready(function() {
 				var inputID = $(this).attr('id');
 				
 				if(typeof inputID !== 'undefined') {
-					$(this).val('');	
 					var labelID = '#' + inputID.replace(':', '\\:lbl-');		
-					$(this).toggleClassCustom(labelID, 'active', false);					
+					$(this).toggleClassCustom(labelID, 'active', true);					
 				}
 			}); 
 			
@@ -140,33 +140,33 @@ $(document).ready(function() {
 		}
 	}
 	
+	jQuery.fn.submitForm = function(refElement, event) {
+		var $set = $('#formTable input');
+		var len = $set.length;
+		var errors = 0;
+		
+		$set.each(function(index, element) {	
+			var errorMessage = element.validationMessage;
+			
+			if(errorMessage !== '') {				
+				$(this).next("label").attr("data-error", element.validationMessage );
+				$(this).removeClass("valid");
+				$(this).addClass("invalid");
+				errors++;
+			} 
+				
+			if (index == len - 1) {
+				if(errors < 1) {
+					$( "#formTable\\:btnSubmit" ).trigger( "click" );
+					$('#dlgDetalhe').closeModal(); 		
+				}
+	        }
+		});
+		
+		return false;
+	}
+		
 	$(this).ajustaTabela({"status" : "ready"});
 	
-	$('button').submit(function() {
-		$(this).find('#loader-wrapper').remove();
-	});
 
-	$("button").trigger('submit');
-	
-	$("#formTable").validate({
-		submitHandler: function(form) {
-			alert('submitHandler');
-			
-		    $(form).ajaxSubmit();
-		    $(this).find('#loader-wrapper').remove();
-		},
-		invalidHandler: function(event, validator) {
-			alert('invalidHandler');
-			// 'this' refers to the form
-			var errors = validator.numberOfInvalids();
-			if (errors) {
-				var message = errors == 1
-				? 'You missed 1 field. It has been highlighted'
-				: 'You missed ' + errors + ' fields. They have been highlighted';
-				Materialize.toast(message, 4000);
-			} else {
-			  $("div.error").hide();
-			}
-		}
-	});
 });	

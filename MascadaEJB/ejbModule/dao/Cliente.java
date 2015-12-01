@@ -18,7 +18,7 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 @NamedQueries({
 	@NamedQuery(name="todosClientes",
-			query="Select c from Cliente c"),
+			query="Select c from Cliente c ORDER BY c.oid DESC"),
 	@NamedQuery(name="todosClientesPorId",
 			query="Select c from Cliente c where c.oid = :oid"),
 	@NamedQuery(name="clientePorCPF",

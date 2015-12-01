@@ -19,7 +19,10 @@
   <title><ui:insert name="title">Default title</ui:insert></title>
   
   <!-- ENCONTRAR ICONES COMPATIVEIS: http://flatfull.com/themes/materil/html/ui.material.icon.html -->
-	     	
+  
+  <h:outputScript library="js" name="jquery-2.1.1.min.js"></h:outputScript>  
+  <h:outputScript library="js" name="materialize.min.js"></h:outputScript>
+	
   <!--Optimizado mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
 </h:head>
@@ -187,9 +190,7 @@
 	
 	<!--Import jQuery before materialize.js-->
 	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
-	<h:outputScript library="js" name="jquery-2.1.1.min.js"></h:outputScript>
-    
-	<h:outputScript library="js" name="materialize.min.js"></h:outputScript>
+	
 	<!-- ================================================
     Scripts
     ================================================ -->
@@ -200,6 +201,7 @@
     <h:outputScript library="js" name="plugins.js" ></h:outputScript> 
     
     <ui:insert name="customScripts"></ui:insert>
+    
 </body>
 
 </html>

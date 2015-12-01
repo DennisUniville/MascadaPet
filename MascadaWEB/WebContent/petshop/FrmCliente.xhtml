@@ -11,6 +11,31 @@
 	
 	<ui:define name="customCSS">
 		 <h:outputStylesheet library="css" name="pet/customCadastros.css"/>
+		 <style type="text/css" >
+		 	label {
+            width: 100%;
+	        }
+	        label:after {
+	            -moz-transition-property: all !important;
+	            -o-transition-property: all !important;
+	            -webkit-transition-property: all !important;
+	            transition-property: all !important;
+	            font-size: 0.8rem;
+	            -moz-transform: none;
+	            -ms-transform: none;
+	            -o-transform: none;
+	            -webkit-transform: none;
+	            transform: none;
+	        }
+	
+	        label:not(.active):after {
+	            -moz-transform: translateY(-140%);
+	            -ms-transform: translateY(-140%);
+	            -o-transform: translateY(-140%);
+	            -webkit-transform: translateY(-140%);
+	            transform: translateY(-140%);
+	        }
+		 </style>
 	</ui:define>
 	
 	<ui:define name="breadcrumbs-title">Clientes</ui:define>
@@ -27,10 +52,21 @@
 		<div class="divider"></div>
          
          <h:form id="formTable" >
-         	<div id="cardTable" class="card-panel" onload="Materialize.fadeInImage('#dataTableID')">	      
+         	<div id="cardTable" class="card-panel" onload="Materialize.fadeInImage('#dataTableID')">	
+         	  
+         	  <h:commandLink style="margin-bottom: 1.5em;" styleClass="btn pink accent-2 waves-effect waves-light left" 
+	      		actionListener="#{crtCliente.inicializaCliente}" value="Adicionar">   			
+	      		<f:ajax event="action" render="@form" onevent="$(this).openModal2" />
+	      	</h:commandLink>
+	      		      
 		      <h:dataTable id="dataTableID" styleClass="bordered striped hoverable responsive-table"
 		      		value="#{crtCliente.clienteBean.getTodosClientes()}" var="cliente"  binding="#{crtCliente.dataTable}"
 		      		>
+		      	<h:column>
+		      		<f:facet name="header">Codigo</f:facet>
+		      		#{cliente.oid}
+		      	</h:column>
+		      	
 		      	<h:column>
 		      		<f:facet name="header">CPF</f:facet>
 		      		#{cliente.cpf}
@@ -63,10 +99,7 @@
 		      	</h:column>
 		      </h:dataTable>
 		      
-		      <h:commandLink style="margin-top: 1.5em;" styleClass="btn pink accent-2 waves-effect waves-light left" 
-	      			actionListener="#{crtCliente.inicializaCliente}" value="Adicionar">   			
-	      			<f:ajax event="action" render="@form" onevent="$(this).openModal2" />
-	      		</h:commandLink>
+		      
 	      	</div>
                             			
 			<div id="dlgDetalhe" class="modal" style="display: none; opacity: 1; top: 0px;">
@@ -80,30 +113,33 @@
 			
 							<div class="row">
 								<div class="input-field col s2">				
-									<h:inputText id="codigo" disabled="true" styleClass="validate" value="#{crtCliente.model.oid}" ></h:inputText>
+									<h:inputText id="codigo"  styleClass="validate"  
+									 value="#{crtCliente.model.oid}" ></h:inputText>
 									<h:outputLabel id="lbl-codigo" for="codigo" value="Codigo"></h:outputLabel>
 								</div>
 			
 								<div class="input-field col s7">
-									<h:inputText id="nome" styleClass="validate" value="#{crtCliente.model.nome}" ></h:inputText>
-									<h:outputLabel id="lbl-nome" for="nome" value="Nome"></h:outputLabel>
+									<h:inputText id="nome" styleClass="validate" value="#{crtCliente.model.nome}" p:required="required" p:aria-required="true" ></h:inputText>
+									<h:outputLabel id="lbl-nome" for="nome" value="Nome" p:data-error="" p:data-success="" ></h:outputLabel>
 								</div>
 			
 								<div class="input-field col s3">
-									<h:inputText id="cpf" styleClass="validate" value="#{crtCliente.model.cpf}" ></h:inputText>
-									<h:outputLabel id="lbl-cpf" for="cpf" value="CPF"></h:outputLabel>
+									<h:inputText id="cpf" styleClass="validate" value="#{crtCliente.model.cpf}" p:required="required" p:aria-required="true" ></h:inputText>
+									<h:outputLabel id="lbl-cpf" for="cpf" value="CPF" p:data-error="" p:data-success="" ></h:outputLabel>
 								</div>
 							</div>
 			
 							<div class="row">
 								<div class="input-field col s6">
-									<h:inputText id="telefone" styleClass="validate" value="#{crtCliente.model.telefone}" ></h:inputText>
-									<h:outputLabel id="lbl-telefone" for="telefone" value="Telefone"></h:outputLabel>
+									<h:inputText id="telefone" styleClass="validate" value="#{crtCliente.model.telefone}"
+										p:required="required" p:aria-required="true" ></h:inputText>
+									<h:outputLabel id="lbl-telefone" for="telefone" value="Telefone" p:data-error="" p:data-success="" ></h:outputLabel>
 								</div>
 			
 								<div class="input-field col s6">
-									<h:inputText id="email" styleClass="validate" p:type="email" value="#{crtCliente.model.email}" ></h:inputText>
-									<h:outputLabel id="lbl-email" for="email" value="Email"></h:outputLabel>
+									<h:inputText id="email" styleClass="validate" p:type="email" value="#{crtCliente.model.email}"
+										 p:required="required" p:aria-required="true" ></h:inputText>
+									<h:outputLabel id="lbl-email" for="email" value="Email" p:data-error="" p:data-success="" ></h:outputLabel>
 								</div>
 							</div>
 			
@@ -111,13 +147,15 @@
 			
 							<div class="row">
 								<div class="input-field col s8">
-									<h:inputText id="rua" styleClass="validate" value="#{crtCliente.model.endereco.rua}" label="lbl-rua" ></h:inputText>
-									<h:outputLabel id="lbl-rua" for="rua" value="Rua"></h:outputLabel>
+									<h:inputText id="rua" styleClass="validate" value="#{crtCliente.model.endereco.rua}" 
+										label="lbl-rua" p:required="required" p:aria-required="true" ></h:inputText>
+									<h:outputLabel id="lbl-rua" for="rua" value="Rua" p:data-error="" p:data-success="" ></h:outputLabel>
 								</div>
 			
 								<div class="input-field col s4">
-									<h:inputText id="numero" styleClass="validate" value="#{crtCliente.model.endereco.numero}" label="lbl-numero" ></h:inputText>
-									<h:outputLabel id="lbl-numero" for="numero" value="Numero"></h:outputLabel>
+									<h:inputText id="numero" styleClass="validate" value="#{crtCliente.model.endereco.numero}" 
+										p:required="required" p:aria-required="true" label="lbl-numero" ></h:inputText>
+									<h:outputLabel id="lbl-numero" for="numero" value="Numero" p:data-error="" p:data-success="" ></h:outputLabel>
 								</div>
 							</div>
 			
@@ -129,68 +167,83 @@
 								</div>
 			
 								<div class="input-field col s6"> 
-									<h:inputText id="bairro" styleClass="validate" value="#{crtCliente.model.endereco.bairro}" label="lbl-bairro" ></h:inputText>
-									<h:outputLabel id="lbl-bairro" for="bairro" value="Bairro"></h:outputLabel>
+									<h:inputText id="bairro" styleClass="validate" value="#{crtCliente.model.endereco.bairro}" 
+									p:required="required" p:aria-required="true" label="lbl-bairro" ></h:inputText>
+									<h:outputLabel id="lbl-bairro" for="bairro" value="Bairro" p:data-error="" p:data-success="" ></h:outputLabel>
 								</div>
 			
 								<div class="input-field col s2">
-									<h:inputText id="cep" styleClass="validate" value="#{crtCliente.model.endereco.cep}" label="lbl-cep" ></h:inputText>
-									<h:outputLabel id="lbl-cep" for="cep" value="CEP" ></h:outputLabel>
+									<h:inputText id="cep" styleClass="validate" value="#{crtCliente.model.endereco.cep}" 
+									p:required="required" p:aria-required="true" label="lbl-cep" ></h:inputText>
+									<h:outputLabel id="lbl-cep" for="cep" value="CEP" p:data-error="" p:data-success="" ></h:outputLabel>
 								</div>
 							</div>
 						</div>
 					</div>		
 					
-					<button jsf:action="#{crtCliente.save}" type="submit" 
-						class="waves-effect waves-light btn modal-action modal-close pink accent-2" >
-						<f:ajax event="action" execute="@form" render="@form" onevent="$(this).ajustaTabela"/>Salvar</button>	
-					
-					<button jsf:rendered="#{crtCliente.model.oid gt 0}" jsf:action="#{crtCliente.delete}" type="submit" style="margin-left: 0.5em;"
-						class="waves-effect waves-light btn pink accent-2 modal-action modal-close" >
+					<h:commandLink style="margin-left: 0.5em;" 
+						class="waves-effect waves-light btn pink accent-2" >
+						<f:ajax event="click" onevent="$(this).submitForm(this, event)" />Salvar</h:commandLink>
+						
+					<button jsf:rendered="#{crtCliente.model.oid gt 0}" jsf:action="#{crtCliente.delete}" type="submit" jsf:id="btnDelete" style="margin-left: 0.5em;"
+						class="waves-effect waves-light btn pink accent-2 modal-action modal-close" > 
 						<f:ajax event="action" execute="@form" render="@form" onevent="$(this).ajustaTabela"/>Excluir</button>
 					
 					<h:commandLink rendered="#{crtCliente.model.oid eq 0}" style="margin-left: 0.5em;"
 						class="waves-effect waves-light btn pink accent-2"  actionListener="#{crtCliente.inicializaCliente}" >
 						<f:ajax event="click" onevent="$(this).zeraModal"/>Limpar</h:commandLink>
-						
+					
+					<button jsf:action="#{crtCliente.save}" type="submit"  jsf:id="btnSubmit" style="display: none;"
+						class="waves-effect waves-light btn pink accent-2 modal-action modal-close" >
+						<f:ajax event="action" execute="@form" render="@form" onevent="$(this).ajustaTabela"/></button>		
 				</div>
 			</div>	
 			
-			<div id="dlgDeleta" class="modal" style="display: none; opacity: 1; top: 0px;">
-				<div class="modal-content">
+			<div id="dlgDeleta" class="modal" style="display: none; opacity: 1; top: 0px; width: 6 	00px;">
+				<div class="modal-content center">
 					
 					<div onclick="$('#dlgDeleta').closeModal()" ><span class="spanClicavel"><i class="mdi-navigation-close right"></i></span></div>
 					
 					<div class="row">
-						<div class="col s12" >
-							<p class="caption">Deseja Deletar o Cliente?</p>
-							<div class="row">
-								<div class="input-field col s2">				
-									<h:inputText id="codigo1" disabled="true" styleClass="validate" value="#{crtCliente.model.oid}" ></h:inputText>
-									<h:outputLabel id="lbl-codigo1" for="codigo" value="Codigo"></h:outputLabel>
-								</div>
-			
-								<div class="input-field col s7">
-									<h:inputText id="nome1" disabled="true" styleClass="validate" value="#{crtCliente.model.nome}" ></h:inputText>
-									<h:outputLabel id="lbl-nome1" for="nome" value="Nome"></h:outputLabel>
-								</div>
-							</div>
+						<div class="col s12 centered" >
+							<p class="caption" >Deseja Deletar o Cliente?</p>
+							<h5><strong>Código: #{crtCliente.model.oid} - Nome: #{crtCliente.model.nome} </strong></h5>
 						</div>
 					</div>
-					
-					<button jsf:action="#{crtCliente.delete}" type="submit" style="margin-left: 0.5em;"
-						class="waves-effect waves-light btn pink accent-2 modal-action modal-close" >
-						<f:ajax event="action" execute="@form" render="@form" onevent="$(this).ajustaTabela"/>Excluir</button>
-					
-					<h:commandLink style="margin-left: 0.5em;"
-						class="waves-effect waves-light btn pink accent-2"  actionListener="#{crtCliente.inicializaCliente}" >
-						<f:ajax event="click" onevent="$(this).zeraModal"/>Cancela</h:commandLink>
+					<div class="row">
+						<button jsf:action="#{crtCliente.delete}" type="submit" style="margin-left: 0.5em;"
+							class="waves-effect waves-light btn pink accent-2 modal-action modal-close" >
+							<f:ajax event="action" execute="@form" render="@form" onevent="$(this).ajustaTabela"/>Excluir</button>
+						
+						<h:commandLink style="margin-left: 0.5em;"
+							class="waves-effect waves-light btn pink accent-2"  actionListener="#{crtCliente.inicializaCliente}" >
+							<f:ajax event="click" onevent="$(this).zeraModal"/>Cancela</h:commandLink>
+					</div>
 				</div>
-			</div>  	
+			</div>  
+			<h:panelGroup rendered="#{requestScope.msg != null}">
+				<script>
+					$(document).ready(function() {
+						Materialize.toast("#{requestScope.msg}", 1000, 'deep-orange accent-4 center', function(){
+							$('#dlgDetalhe input').each(function() {						
+								var inputID = $(this).attr('id');
+								
+								if(typeof inputID !== 'undefined') {
+									var labelID = '#' + inputID.replace(':', '\\:lbl-');			
+									$(this).toggleClassCustom(labelID, 'active', true);					
+								}
+							}); 
+								
+							$('#dlgDetalhe').openModal();
+						});
+					}); 
+				</script>
+			</h:panelGroup>	
 	 </h:form> 
 	</ui:define>
 	
 	<ui:define name="customScripts">
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
 		<h:outputScript library="js" name="customCadastros.js" ></h:outputScript>
 	</ui:define>
 </ui:composition>

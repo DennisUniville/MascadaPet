@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
  * Superclasse de todos os beans CDI
  */
 public abstract class AbstractBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Adiciona uma mensagem ao escopo da request. Esta mensagem pode ser exibida na tela através da chamada

@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import dao.Cliente;
 import dao.Endereco;
+import ejb.exception.ValidationException;
 
 /**
  * Session Bean implementation class RacaBean
@@ -71,8 +72,23 @@ public class ClienteBean implements ClienteBeanLocal {
 		return null;
 	}
 	
+	public boolean existeCPF(String cpf, long oid) {
+		String query = "SELECT COUNT(c) FROM Cliente C WHERE c.cpf = '" + cpf + "'";
+		
+		if (oid > 0) {
+			query += " AND c.oid != " + oid;
+		}
+		
+		Query q = em.createQuery(query);
+		long count = (Long) q.getResultList().get(0);
+		return count > 0;
+	}
+	
 	@Override
-	public void save(Cliente cliente){	
+	public void save(Cliente cliente) throws ValidationException {
+		if(existeCPF(cliente.getCpf(), cliente.getOid()))
+			throw new ValidationException("O CPF informado ja esta sendo utilizado!");
+		
 		if(em.find(Cliente.class, cliente.getOid()) == null){
 			em.persist(cliente);
 		}else{
