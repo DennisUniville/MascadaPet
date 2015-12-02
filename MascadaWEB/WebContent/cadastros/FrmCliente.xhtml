@@ -1,4 +1,4 @@
-<ui:composition template="/petshop/template/index.xhtml"
+<ui:composition template="/layout.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -11,31 +11,6 @@
 	
 	<ui:define name="customCSS">
 		 <h:outputStylesheet library="css" name="pet/customCadastros.css"/>
-		 <style type="text/css" >
-		 	label {
-            width: 100%;
-	        }
-	        label:after {
-	            -moz-transition-property: all !important;
-	            -o-transition-property: all !important;
-	            -webkit-transition-property: all !important;
-	            transition-property: all !important;
-	            font-size: 0.8rem;
-	            -moz-transform: none;
-	            -ms-transform: none;
-	            -o-transform: none;
-	            -webkit-transform: none;
-	            transform: none;
-	        }
-	
-	        label:not(.active):after {
-	            -moz-transform: translateY(-140%);
-	            -ms-transform: translateY(-140%);
-	            -o-transform: translateY(-140%);
-	            -webkit-transform: translateY(-140%);
-	            transform: translateY(-140%);
-	        }
-		 </style>
 	</ui:define>
 	
 	<ui:define name="breadcrumbs-title">Clientes</ui:define>
@@ -199,7 +174,7 @@
 				</div>
 			</div>	
 			
-			<div id="dlgDeleta" class="modal" style="display: none; opacity: 1; top: 0px; width: 6 	00px;">
+			<div id="dlgDeleta" class="modal" style="display: none; opacity: 1; top: 0px; width: 600px;">
 				<div class="modal-content center">
 					
 					<div onclick="$('#dlgDeleta').closeModal()" ><span class="spanClicavel"><i class="mdi-navigation-close right"></i></span></div>
@@ -221,29 +196,12 @@
 					</div>
 				</div>
 			</div>  
-			<h:panelGroup rendered="#{requestScope.msg != null}">
-				<script>
-					$(document).ready(function() {
-						Materialize.toast("#{requestScope.msg}", 1000, 'deep-orange accent-4 center', function(){
-							$('#dlgDetalhe input').each(function() {						
-								var inputID = $(this).attr('id');
-								
-								if(typeof inputID !== 'undefined') {
-									var labelID = '#' + inputID.replace(':', '\\:lbl-');			
-									$(this).toggleClassCustom(labelID, 'active', true);					
-								}
-							}); 
-								
-							$('#dlgDetalhe').openModal();
-						});
-					}); 
-				</script>
-			</h:panelGroup>	
+		
+			<ui:include src="/messages.xhtml" ></ui:include>
 	 </h:form> 
 	</ui:define>
 	
 	<ui:define name="customScripts">
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
 		<h:outputScript library="js" name="customCadastros.js" ></h:outputScript>
 	</ui:define>
 </ui:composition>

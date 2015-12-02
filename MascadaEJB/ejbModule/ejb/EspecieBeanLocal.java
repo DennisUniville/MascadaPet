@@ -14,5 +14,4 @@ public interface EspecieBeanLocal {
 	public Especie getEspeciePorOid(long oid);
 	public void save(Especie especie);
 	void delete(Especie especie);
-
 }

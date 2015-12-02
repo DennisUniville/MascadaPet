@@ -9,12 +9,7 @@ import javax.faces.component.html.HtmlDataTable;
 import javax.faces.event.ActionEvent;
 
 import dao.Especie;
-import dao.Especie;
 import ejb.EspecieBeanLocal;
-
-import dao.Raca;
-import dao.Raca;
-import ejb.RacaBeanLocal;
 
 @ManagedBean(name="crtEspecie")
 @ViewScoped
@@ -26,7 +21,7 @@ public class CrtEspecie implements Serializable {
 	private transient HtmlDataTable dataTable;
 	
 	public void inicializaEspecie(ActionEvent event){
-		model= new Especie();
+		model = new Especie();
 	}
 	
 	public void selecionarEspecie(ActionEvent event) {
@@ -34,8 +29,6 @@ public class CrtEspecie implements Serializable {
 	}
 	
 	public void save(){
-		
-		
 		especieBean.save(model);
 	}
 	
@@ -53,8 +46,6 @@ public class CrtEspecie implements Serializable {
 	public void setModel(Especie model) {
 		this.model = model;
 	}
-
-
 
 	public void setEspecieBean(EspecieBeanLocal especieBean) {
 		this.especieBean = especieBean;

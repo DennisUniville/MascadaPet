@@ -23,13 +23,15 @@ $(document).ready(function() {
 				}
 			});
 			
-			$('#formTable\\:selectID').material_select();
-			$('.dropdown').prepend("<option value=\"\" disabled selected>Escolha a opcao</option>");
-			
-			var $carets = $('#divSelect').find('.caret');
-			
-			if($carets.length > 1) {
-				$carets.first().remove();
+			if(document.getElementById(name)){
+				$('#formTable\\:selectID').material_select();
+				$('.dropdown').prepend("<option value=\"\" disabled selected>Escolha a opcao</option>");
+				
+				var $carets = $('#divSelect').find('.caret');
+				
+				if($carets.length > 1) {
+					$carets.first().remove();
+				}
 			}
 			
 			$(this).ajustaTabela(data);
@@ -85,14 +87,16 @@ $(document).ready(function() {
 					$(this).toggleClassCustom(labelID, 'active', false);					
 				}
 			}); 
-
-			$('#formTable\\:selectID').material_select();
-			$('.dropdown').prepend("<option value=\"\" disabled selected>Escolha a opcao</option>");
 			
-			var $carets = $('#divSelect').find('.caret');
-			
-			if($carets.length > 1) {
-				$carets.first().remove();
+			if(document.getElementById(name)){
+				$('#formTable\\:selectID').material_select();
+				$('.dropdown').prepend("<option value=\"\" disabled selected>Escolha a opcao</option>");
+				
+				var $carets = $('#divSelect').find('.caret');
+				
+				if($carets.length > 1) {
+					$carets.first().remove();
+				}
 			}
 			
 			$('#dlgDetalhe').openModal();
@@ -102,6 +106,7 @@ $(document).ready(function() {
 	
 	jQuery.fn.deletaObjeto = function(data) {
 		if (data.status == "success") {
+			
 			$('#dlgDeleta input').each(function() {						
 				var inputID = $(this).attr('id');
 				
@@ -110,6 +115,8 @@ $(document).ready(function() {
 					$(this).toggleClassCustom(labelID, 'active', true);					
 				}
 			}); 
+			
+			alert('dlgDeleta');
 			
 			$('#dlgDeleta').openModal();
 			$(this).ajustaTabela(data);
@@ -149,7 +156,7 @@ $(document).ready(function() {
 			var errorMessage = element.validationMessage;
 			
 			if(errorMessage !== '') {				
-				$(this).next("label").attr("data-error", element.validationMessage );
+				$(this).next("label").attr("data-error", errorMessage );
 				$(this).removeClass("valid");
 				$(this).addClass("invalid");
 				errors++;

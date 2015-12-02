@@ -1,0 +1,228 @@
+<ui:composition template="/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"  >
+
+	<ui:define name="title">Cadastro de Especie</ui:define>
+	
+	<ui:define name="customCSS">
+		 <h:outputStylesheet library="css" name="pet/customCadastros.css"/>
+	</ui:define>
+	
+	<ui:define name="breadcrumbs-title">Especies</ui:define>
+	
+	<ui:define name="breadcrumb">
+		<li><a href="">Inicio</a></li>
+		<li><a href="">Cadastros</a></li>
+		<li class="active">Especie</li>                       
+	</ui:define>
+	
+	<ui:define name="content">
+		
+		<p class="caption">Relação de Especies cadastrados</p>		
+		<div class="divider"></div>
+         
+         <h:form id="formTable" >
+         
+         	<div id="cardTable" 
+	       		class="card-panel" 
+	       		onload="Materialize.fadeInImage('#dataTableID')" >	
+         	  
+         	  <h:commandLink style="margin-bottom: 1.5em;" 
+	   	  		  styleClass="btn pink accent-2 waves-effect waves-light left" 
+	 			  actionListener="#{crtEspecie.inicializaEspecie}" 
+	 			  value="Adicionar" >
+	      			   			
+	      		<f:ajax event="action" 
+	      			render="@form" 
+	      			onevent="$(this).openModal2" />
+	      			
+	      	  </h:commandLink>
+	      		      
+		      <h:dataTable id="dataTableID" 
+	      		  styleClass="bordered striped hoverable responsive-table"
+		      	  value="#{crtEspecie.especieBean.getTodasEspecies()}" 
+		      	  var="especie"  
+		          binding="#{crtEspecie.dataTable}" >
+		      		
+		      	<h:column>
+		      		<f:facet name="header">Codigo</f:facet>
+		      		#{especie.oid}
+		      	</h:column>
+		      	
+		      	<h:column>
+		      		<f:facet name="header">Descricao</f:facet>
+		      		#{especie.descricao}
+		      	</h:column>
+		      	
+		      	<h:column>
+		      		<h:commandLink styleClass="btn-floating btn-flat waves-effect waves-light pink accent-2" 
+		      			actionListener="#{crtEspecie.selecionarEspecie}" >
+		      			<f:ajax event="action" 
+		      				onevent="$(this).atualizaModal" />
+		      			<i class="mdi-editor-border-color"></i>
+		      		</h:commandLink>
+		      	</h:column>
+				
+				<h:column>
+		      		<h:commandLink styleClass="btn-floating btn-flat waves-effect waves-light pink accent-2" 
+		      			actionListener="#{crtEspecie.selecionarEspecie}" >
+		      			<f:ajax event="action" 
+		      				onevent="$(this).deletaObjeto"/>
+		      			<i class="mdi-action-delete"></i>
+		      		</h:commandLink>
+		      	</h:column>
+		      </h:dataTable>
+		      
+		      
+	      	</div>
+            
+            <div id="dlgDeleta" 
+				class="modal" 
+				style="display: none; opacity: 1; top: 0px; width: 600px;">
+				
+				<div class="modal-content center">
+					
+					<div onclick="$('#dlgDeleta').closeModal()" >
+						<span class="spanClicavel">
+							<i class="mdi-navigation-close right"></i>
+						</span>
+					</div>
+					
+					<div class="row">
+						<div class="col s12 centered" >
+							<p class="caption" >
+								Deseja Deletar a Espécie?
+							</p>
+							<h5>
+								<strong>
+									Código: #{crtEspecie.model.oid} - Descrição: #{crtEspecie.model.descricao} 
+								</strong>
+							</h5>
+						</div>
+					</div>
+					<div class="row">
+						<button jsf:action="#{crtEspecie.delete}" 
+							type="submit" 
+							style="margin-left: 0.5em;"
+							class="waves-effect waves-light btn pink accent-2 modal-action modal-close" >
+							<f:ajax event="action" 
+								execute="@form" 
+								render="@form" 
+								onevent="$(this).ajustaTabela"/>
+							Excluir
+						</button>
+						
+						<h:commandLink style="margin-left: 0.5em;"
+							class="waves-effect waves-light btn pink accent-2"  
+							actionListener="#{crtEspecie.inicializaEspecie}" >
+							<f:ajax event="click" 
+								onevent="$(this).zeraModal"/>
+							Cancela
+						</h:commandLink>
+					</div>
+				</div>
+			</div>  
+			              			
+			<div id="dlgDetalhe" 
+				class="modal" 
+				style="display: none; opacity: 1; top: 0px;" >
+				<div class="modal-content">
+					
+					<div onclick="$('#dlgDetalhe').closeModal()" >
+						<span class="spanClicavel">
+							<i class="mdi-navigation-close right"></i>
+						</span>
+					</div>
+					
+					<div class="row">
+						<div class="col s12" >
+							<p class="caption">Dados da Espécie:</p>	
+			
+							<div class="row">
+								<div class="input-field col s3">				
+									<h:inputText id="codigo"  
+										styleClass="validate"  
+								 		value="#{crtEspecie.model.oid}" >
+									 </h:inputText>
+									 
+									<h:outputLabel id="lbl-codigo" 
+										for="codigo" 
+										value="Codigo">
+									</h:outputLabel>
+								</div>
+			
+								<div class="input-field col s9">
+									<h:inputText id="descricao" 
+										styleClass="validate" 
+										value="#{crtEspecie.model.descricao}" 
+										p:required="required" 
+										p:aria-required="true" >
+									</h:inputText>
+										
+									<h:outputLabel id="lbl-descricao" 
+										for="descricao" 
+										value="Descrição" 
+										p:data-error="" 
+										p:data-success="" >
+									</h:outputLabel>
+								</div>
+							</div>
+						</div>
+					</div>		
+					
+					<h:commandLink style="margin-left: 0.5em;" 
+						class="waves-effect waves-light btn pink accent-2" >
+						<f:ajax event="click" 
+							onevent="$(this).submitForm(this, event)" />
+						Salvar
+					</h:commandLink>
+						
+					<button jsf:rendered="#{crtEspecie.model.oid gt 0}" 
+						jsf:action="#{crtEspecie.delete}" 
+						type="submit" 
+						jsf:id="btnDelete" 
+						style="margin-left: 0.5em;"
+						class="waves-effect waves-light btn pink accent-2 modal-action modal-close" > 
+						<f:ajax event="action" 
+							execute="@form" 
+							render="@form" 
+							onevent="$(this).ajustaTabela"/>
+						Excluir
+					</button>
+					
+					<h:commandLink rendered="#{crtEspecie.model.oid eq 0}" 
+						style="margin-left: 0.5em;"
+						class="waves-effect waves-light btn pink accent-2"  
+						actionListener="#{crtEspecie.inicializaEspecie}" >
+						<f:ajax event="click" 
+							onevent="$(this).zeraModal"/>
+						Limpar
+					</h:commandLink>
+					
+					<button style="display: none;"
+						jsf:action="#{crtEspecie.save}" 
+						type="submit"  
+						jsf:id="btnSubmit"
+						class="waves-effect waves-light btn pink accent-2 modal-action modal-close" >
+						
+						<f:ajax event="action" 
+							execute="@form" 
+							render="@form" 
+							onevent="$(this).ajustaTabela"/>
+					</button>		
+				</div>
+			</div>	
+		
+			<ui:include src="/messages.xhtml" ></ui:include>
+	 </h:form> 
+	</ui:define>
+	
+	<ui:define name="customScripts">
+		<h:outputScript library="js" name="customCadastros.js" ></h:outputScript>
+	</ui:define>
+</ui:composition>
