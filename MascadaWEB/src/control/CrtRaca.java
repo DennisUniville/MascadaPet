@@ -10,9 +10,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.event.ActionEvent;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import dao.Especie;
 import dao.Raca;
 import ejb.EspecieBeanLocal;
@@ -108,15 +105,4 @@ public class CrtRaca extends AbstractBean {
 		this.especiesCol = especiesCol;
 	}
 
-	public String objectToJson() {
-		ObjectMapper objectMapper = new ObjectMapper();
-		try {
-			String jsonInString = objectMapper.writeValueAsString(model);
-			System.out.println(jsonInString);
-			return jsonInString;
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 }

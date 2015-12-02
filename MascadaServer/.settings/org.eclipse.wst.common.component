@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="MascadaServer">
         <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
-        <dependent-module archiveName="MascadaEJB.jar" deploy-path="/" handle="module:/resource/MascadaEJB/MascadaEJB">
+        <dependent-module archiveName="MascadaWEB.war" deploy-path="/" handle="module:/resource/MascadaWEB/MascadaWEB">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="MascadaWEB.war" deploy-path="/" handle="module:/resource/MascadaWEB/MascadaWEB">
+        <dependent-module archiveName="MascadaEJB.jar" deploy-path="/" handle="module:/resource/MascadaEJB/MascadaEJB">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>

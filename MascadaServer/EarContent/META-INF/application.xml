@@ -2,12 +2,12 @@
 <application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_6.xsd" id="Application_ID" version="6">
   <display-name>MascadaServer</display-name>
   <module>
-    <ejb>MascadaEJB.jar</ejb>
-  </module>
-  <module>
     <web>
       <web-uri>MascadaWEB.war</web-uri>
       <context-root>MascadaWEB</context-root>
     </web>
+  </module>
+  <module>
+    <ejb>MascadaEJB.jar</ejb>
   </module>
 </application>
