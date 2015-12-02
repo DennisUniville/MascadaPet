@@ -10,10 +10,4 @@
       <context-root>MascadaWEB</context-root>
     </web>
   </module>
-  <module id="Module_1448416827712">
-  	<web>
-  		<web-uri>MascadaWEBResource.war</web-uri>
-  		<context-root>MascadaWEBResource</context-root>
-  	</web>
-  </module>
 </application>

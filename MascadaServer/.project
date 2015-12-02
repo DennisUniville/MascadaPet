@@ -6,7 +6,6 @@
 		<project>MascadaEJB</project>
 		<project>MascadaWEB</project>
 		<project>RemoteSystemsTempFiles</project>
-		<project>MascadaWEBResource</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

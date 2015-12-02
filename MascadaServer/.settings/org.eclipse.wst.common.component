@@ -9,9 +9,5 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="MascadaWEBResource.war" deploy-path="/" handle="module:/resource/MascadaWEBResource/MascadaWEBResource">
-            <dependent-object>Module_1448416827712</dependent-object>
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
     </wb-module>
 </project-modules>
