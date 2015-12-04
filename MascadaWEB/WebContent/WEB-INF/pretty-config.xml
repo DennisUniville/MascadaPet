@@ -2,7 +2,22 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
                       http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
-
+	
+	<url-mapping id="Login">
+		<pattern value="/Login/" />
+		<view-id value="/Login.jsf" /> 
+	</url-mapping>
+	
+	<url-mapping id="Logout">
+		<pattern value="/Logout/" />
+		<view-id value="/Logout.jsf" /> 
+	</url-mapping>
+	
+	<url-mapping id="Inicio">
+		<pattern value="/Inicio" />
+		<view-id value="/inicio.jsf" /> 
+	</url-mapping>
+	
 	<url-mapping id="Cadastros">
 		<pattern value="/Cadastros/" />
 		<view-id value="/FrmCadastros.jsf" /> 

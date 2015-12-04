@@ -184,7 +184,38 @@ $(document).ready(function() {
 		
 		return false;
 	}
+	
+	jQuery.fn.submitLogin = function(refElement, event, dialog) {
+		var $set = $('#formTable input');
+		var len = $set.length;
+		var errors = 0;
 		
+		$set.each(function(index, element) {	
+			var errorMessage = element.validationMessage;
+			
+			if(errorMessage !== '') {				
+				$(this).next("label").attr("data-error", errorMessage );
+				$(this).removeClass("valid");
+				$(this).addClass("invalid");
+				errors++;
+			} 
+				
+			if (index == len - 1) {
+				if(errors < 1) {
+					$( "#formTable\\:btnSubmit" ).trigger( "click" );
+					$('#' + dialog).closeModal(); 		
+				}
+	        }
+		});
+		
+		return false;
+	}
+	
+	jQuery.fn.submitLogout = function() {
+		$( "#formLogout\\:btnSubmit" ).trigger( "click" );	
+		return false;
+	}
+	
 	$(this).ajustaTabela({"status" : "ready"}); 
 	
 	

@@ -2,7 +2,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	  xmlns:jsf="http://xmlns.jcp.org/jsf"
+	  xmlns:f="http://java.sun.com/jsf/core" >
       
 <h:head>
   <h:outputStylesheet library="css" name="pet/icon.css"/>
@@ -70,7 +73,7 @@
 	                    <li class="user-details deep-purple darken-4">
 	                        <div class="row">
 	                            <div class="col col s4 m4 l4">
-	                            	<h:graphicImage library="img" name="pet/avatar.jpg" styleClass="circle responsive-img valign profile-image"/>
+	                            	<h:graphicImage library="img" rendered="#{not empty USUARIO_LOGADO}" name="pet/avatar.jpg" styleClass="circle responsive-img valign profile-image"/>
 	                            </div>
 	                            <div class="col col s8 m8 l8">
 	                                <ul id="profile-dropdown" class="dropdown-content">
@@ -81,11 +84,11 @@
 	                                    <li><a href="#"><i class="mdi-communication-live-help"></i> Ajuda</a>
 	                                    </li>
 	                                    <li class="divider"></li>
-	                                    <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Sair</a>
-	                                    </li>
+	                                    <li><a href="/Logout/" ><i class="mdi-hardware-keyboard-tab"></i> Sair</a> 
+	                                    </li>	                                    
 	                                </ul>
-	                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">Dennis Borba<i class="mdi-navigation-arrow-drop-down right"></i></a>
-	                                <p class="user-roal">Administrador</p>
+	                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">#{USUARIO_LOGADO.login}<i class="mdi-navigation-arrow-drop-down right"></i></a>
+	                                
 	                            </div>
 	                        </div>
 	                    </li>
@@ -127,9 +130,7 @@
 	                    <li><a href=""><i class="mdi-action-assignment-ind"></i> Consultar Cliente</a>
 	                    </li>
 	                    <li><a href=""><i class="mdi-action-find-in-page"></i> Consultar Animal</a>
-	                    </li>          
-	                    <li class="bold"><a href="" class="waves-effect waves-cyan"><i class="mdi-communication-email"></i> Email <span class="new badge red accent-3">4</span></a>
-	                    </li>          
+	                    </li>                   
 	                    <li class="li-hover"><div class="divider"></div></li>
 	                </ul>
 	                <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>

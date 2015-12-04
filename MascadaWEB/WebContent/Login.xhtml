@@ -1,0 +1,78 @@
+<ui:composition template="/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"  >
+
+	<ui:define name="title">Login</ui:define>
+	
+	<ui:define name="customCSS">
+		 <h:outputStylesheet library="css" name="pet/customCadastros.css"/>
+	</ui:define>
+	
+	<ui:define name="breadcrumbs-title">Login</ui:define>
+	
+	<ui:define name="breadcrumb">
+		<li><a href="">Inicio</a></li>
+		<li class="active">Login</li>                       
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form id="formTable" >
+			
+			<div id="dlgLogin" class="modal" style="width: 400px;">
+				<div class="modal-content">
+					
+					<div class="col s12" >
+						<div class="row">
+							<div class="input-field col s12">
+								<h:inputText id="login" styleClass="validate" value="#{crtTemplate.model.login}" 
+									label="lbl-login" p:required="required" p:aria-required="true" ></h:inputText>
+								<h:outputLabel id="lbl-login" for="login" value="login" p:data-error="" p:data-success="" ></h:outputLabel>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<h:inputText id="senha" styleClass="validate" p:type="password" value="#{crtTemplate.model.senha}" 
+									p:required="required" p:aria-required="true" label="lbl-senha" ></h:inputText>
+								<h:outputLabel id="lbl-senha" for="senha" value="Senha" p:data-error="" p:data-success="" ></h:outputLabel>
+							</div>
+						</div>
+					</div>
+
+
+					<h:commandLink style="margin-left: 0.5em;" 
+						class="waves-effect waves-light btn pink accent-2" >
+						<f:ajax event="click" onevent="$(this).submitLogin(this, event, 'dlgLogin')" />Logar</h:commandLink>
+						
+					<button jsf:action="#{crtTemplate.valida}" jsf:id="btnSubmit" type="submit" style="display: none; margin-left: 0.5em;"
+						class="waves-effect waves-light btn pink accent-2 modal-action modal-close right" >
+						<f:ajax event="action" execute="@form" render="@form" /></button>
+
+				</div>
+			</div>  
+		
+			<ui:include src="/messages.xhtml" ></ui:include>
+			
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="customScripts">
+		<h:outputScript library="js" name="customCadastros.js" ></h:outputScript>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#dlgLogin').openModal({
+					dismissible: false,
+					opacity: .5,
+			        complete: function() { 
+			        	
+			        }
+				});
+			});
+		</script>
+	</ui:define>
+</ui:composition>

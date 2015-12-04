@@ -20,6 +20,11 @@ public abstract class AbstractBean implements Serializable {
 		request.setAttribute("msg", message);
 	}
 	
+	protected void addMessageToRequest(String message, String attribute) {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		request.setAttribute(attribute, message);
+	}
+	
 	/**
 	 * A partir de um outcome, retorna o outcome como sendo um redirect ao invés de forward
 	 */

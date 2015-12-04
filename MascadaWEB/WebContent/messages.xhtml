@@ -21,4 +21,24 @@
 			}); 
 		</script>
 	</h:panelGroup>	
+	
+	<h:panelGroup rendered="#{requestScope.login != null}">
+		<script>
+			$(document).ready(function() {
+				Materialize.toast("#{requestScope.login}", 1000, 'deep-orange accent-4 center', function(){
+					$('#dlgLogin input').each(function() {						
+						var inputID = $(this).attr('id');
+						
+						if(typeof inputID !== 'undefined') {
+							var labelID = '#' + inputID.replace(':', '\\:lbl-');			
+							$(this).toggleClassCustom(labelID, 'active', true);					
+						}
+					}); 
+						
+					$('#dlgLogin').openModal();
+				});
+			}); 
+		</script>
+	</h:panelGroup>	
+	
 </ui:composition>
