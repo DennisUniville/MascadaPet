@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:jsf="http://xmlns.jcp.org/jsf"  >
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:masc="http://br.com.mascada/facelets"  >
 
 	<ui:define name="title">Cadastro de Raça</ui:define>
 	
@@ -16,8 +17,8 @@
 	<ui:define name="breadcrumbs-title">Raça</ui:define>
 	
 	<ui:define name="breadcrumb">
-		<li><a href="">Inicio</a></li>
-		<li><a href="">Cadastros</a></li>
+		<li><a href="#{request.contextPath}/">Inicio</a></li>
+		<li><a href="#{request.contextPath}/Cadastros/">Cadastros</a></li>
 		<li class="active">Raça</li>                       
 	</ui:define>
 	
@@ -54,8 +55,8 @@
 		      	
 		      	<h:column>
 		      		<h:commandLink styleClass="btn-floating btn-flat waves-effect waves-light pink accent-2" 
-		      			actionListener="#{crtRaca.selecionarRaca}" >
-		      			<f:ajax event="action" render="@form" onevent="$(this).atualizaModal"/>
+		      			actionListener="#{crtRaca.selecionarRaca}" onclick="$(this).setSelected(#{crtRaca.model.especie.oid})">
+		      			<f:ajax event="action" render="@form" onevent="$(this).atualizaModal" />
 		      			<i class="mdi-editor-border-color"></i>
 		      		</h:commandLink>
 		      	</h:column>
@@ -72,7 +73,7 @@
 		      
 	      	</div>
                             			
-			<div id="dlgDetalhe" class="modal" style="display: none; opacity: 1; top: 0px;">
+			<div id="dlgDetalhe" class="modal" style="display: none; opacity: 1; top: 0px; height: 300px;">
 				<div class="modal-content">
 					
 					<div onclick="$('#dlgDetalhe').closeModal()" ><span class="spanClicavel"><i class="mdi-navigation-close right"></i></span></div>
@@ -88,31 +89,19 @@
 									<h:outputLabel id="lbl-codigo" for="codigo" value="Codigo"></h:outputLabel>
 								</div>
 			
-								<div class="input-field col s7">
+								<div class="input-field col s5">
 									<h:inputText id="descricao" styleClass="validate" value="#{crtRaca.model.descricao}" p:required="required" p:aria-required="true" ></h:inputText>
 									<h:outputLabel id="lbl-descricao" for="descricao" value="Descrição" p:data-error="" p:data-success="" ></h:outputLabel>
 								</div>
 			
-								<div id="divSelect" class="input-field col s3">
-									<h:selectOneMenu id="selectID1" 
-							                 styleClass="validate dropdown" 
-							                 value="#{crtRaca.model.especie.oid}"
-											 hideNoSelectionOption="true"
-							                 p:required="required" 
-							                 p:aria-required="true" 
-											 p:autocomplete='off' >	
-										
-										<f:selectItem noSelectionOption="true" 
-											  itemLabel="Espécie" 
-											  itemDisabled="true" />										
-									    
-									    <f:selectItems value="#{crtRaca.especiesCol}" 
-							    			   var="item"
-							     			   itemLabel="#{item.descricao}" 
-							     			   itemValue="#{item.oid}"/>
-									</h:selectOneMenu>
-									<h:outputLabel for="selectID" value="" p:data-error="" p:data-success="" ></h:outputLabel>
-								</div>
+								<div class="input-field col s5">
+									<select jsf:id="selectID" class="initialized" required="required" size="1" jsf:value="#{crtRaca.model.especie.oid}">
+										<f:selectItem itemValue="#{null}" itemLabel="Escolha a Espécie" p:disabled="" noSelectionOption="true" p:selected="" ></f:selectItem>
+									    <c:forEach items="#{crtRaca.especiesCol}" var="item">
+									        <f:selectItem p:class="#{item.oid} eq #{crtRaca.model.especie.oid} ? 'active selected' : ''" itemValue="#{item.oid}"  itemLabel="#{item.descricao}"></f:selectItem>
+									    </c:forEach>
+									</select>	
+								</div> 
 							</div>
 						</div>
 					</div>		

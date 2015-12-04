@@ -1,0 +1,47 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<url-mapping id="Cadastros">
+		<pattern value="/Cadastros/" />
+		<view-id value="/FrmCadastros.jsf" /> 
+	</url-mapping>
+	
+	<url-mapping id="Cliente">
+		<pattern value="/Cadastros/Cliente/" />
+		<view-id value="/FrmCliente.jsf" /> 
+	</url-mapping>
+
+	<url-mapping id="Especie">
+		<pattern value="/Cadastros/Especie/" />
+		<view-id value="/FrmEspecie.jsf" /> 
+	</url-mapping>
+	
+	<url-mapping id="Raca">
+		<pattern value="/Cadastros/Raca/" />
+		<view-id value="/FrmRaca.jsf" /> 
+	</url-mapping>
+	
+	<url-mapping id="Servico">
+		<pattern value="/Cadastros/Servico/" />
+		<view-id value="/FrmServico.jsf" /> 
+	</url-mapping>
+	
+	<url-mapping id="Animal">
+		<pattern value="/Cadastros/Animal/" />
+		<view-id value="/FrmAnimal.jsf" /> 
+	</url-mapping>
+	
+	<url-mapping id="Chamado">
+		<pattern value="/Cadastros/Chamado/" />
+		<view-id value="/FrmChamado.jsf" /> 
+	</url-mapping>
+	
+	<url-mapping id="Funcionario">
+		<pattern value="/Cadastros/Funcionario/" />
+		<view-id value="/FrmFuncionario.jsf" /> 
+	</url-mapping>
+	
+	
+</pretty-config>

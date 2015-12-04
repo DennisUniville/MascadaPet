@@ -1,4 +1,5 @@
-$(document).ready(function() {				
+$(document).ready(function() {	
+	
 	jQuery.fn.ajustaTabela = function(data) {
 		if (data.status == "success" || data.status == "ready") {
 			$("#formTable\\:dataTableID tr td:LAST-CHILD").css({
@@ -9,7 +10,42 @@ $(document).ready(function() {
 		}
 	}
 	
-	jQuery.fn.atualizaAoSalvar = function(data) {
+	jQuery.fn.ajustaSelect = function(data) {
+		if(document.getElementById('formTable:selectID')) {
+			var option = "Escolha a opcao";
+			var selected = ""; 
+			
+			$("#formTable\\:selectID").material_select();
+			
+			return;
+			if(data.action = 'inserir') {		
+				selected = "selected=\"\""; 
+				$("#formTable\\:selectID" ).val("");				
+				$("#formTable\\:selectID option" )
+					.removeClass("active")
+					.removeAttr( "selected")
+			} else if(data.action = 'alterar') {
+				var optionSelected = $("#formTable\\:selectID option:selected" );
+				var optionSelectedVal = $("#formTable\\:selectID").val();
+				
+				
+			}
+			
+			$('#formTable\\:selectID')
+				.prepend("<option value=\"\" disabled=\"\" >" + option + "</option>");
+			
+			$('#dlgDetalhe')
+				.find(".select-wrapper ul")
+				.prepend("<li class=\"disabled\"><span>" + option + "</span></li>");			
+			
+			$('#dlgDetalhe')
+				.find(".select-wrapper input").val(option);
+			
+			$('#formTable\\:selectID').material_select();
+		}
+	}
+	
+	jQuery.fn.atualizaAoSalvar = function(data) { 
 		$(this).find('#loader-wrapper').remove();
 		
 		if (data.status == "success") {
@@ -23,21 +59,8 @@ $(document).ready(function() {
 				}
 			});
 			
-			if(document.getElementById(name)){
-				$('#formTable\\:selectID').material_select();
-				$('.dropdown').prepend("<option value=\"\" disabled selected>Escolha a opcao</option>");
-				
-				var $carets = $('#divSelect').find('.caret');
-				
-				if($carets.length > 1) {
-					$carets.first().remove();
-				}
-			}
-			
 			$(this).ajustaTabela(data);
-		}
-		
-		
+		}	
 	}
 	
 	jQuery.fn.atualizaModal = function(data) {
@@ -51,7 +74,8 @@ $(document).ready(function() {
 					$(this).toggleClassCustom(labelID, 'active', hasValue);					
 				}
 			}); 
-			
+
+			$(this).ajustaSelect({"action" : "alterar"}, $(this));
 			$('#dlgDetalhe').openModal();
 			$(this).ajustaTabela(data);
 		}
@@ -87,23 +111,13 @@ $(document).ready(function() {
 					$(this).toggleClassCustom(labelID, 'active', false);					
 				}
 			}); 
-			
-			if(document.getElementById(name)){
-				$('#formTable\\:selectID').material_select();
-				$('.dropdown').prepend("<option value=\"\" disabled selected>Escolha a opcao</option>");
-				
-				var $carets = $('#divSelect').find('.caret');
-				
-				if($carets.length > 1) {
-					$carets.first().remove();
-				}
-			}
-			
+
+			$(this).ajustaSelect({"action" : "inserir"});
 			$('#dlgDetalhe').openModal();
 			$(this).ajustaTabela(data);
 		}
 	}
-	
+
 	jQuery.fn.deletaObjeto = function(data) {
 		if (data.status == "success") {
 			
@@ -115,9 +129,7 @@ $(document).ready(function() {
 					$(this).toggleClassCustom(labelID, 'active', true);					
 				}
 			}); 
-			
-			alert('dlgDeleta');
-			
+					
 			$('#dlgDeleta').openModal();
 			$(this).ajustaTabela(data);
 		}
@@ -173,7 +185,7 @@ $(document).ready(function() {
 		return false;
 	}
 		
-	$(this).ajustaTabela({"status" : "ready"});
+	$(this).ajustaTabela({"status" : "ready"}); 
 	
-
+	
 });	

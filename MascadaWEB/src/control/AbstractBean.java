@@ -26,4 +26,5 @@ public abstract class AbstractBean implements Serializable {
 	protected String redirect(String outcome) {
 		return outcome + "?faces-redirect=true";
 	}
+	
 }
